@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-tho-bac-ho-3596-519.jpg.webp');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+    <a class="nav-link text-white" href="vatthe.html">
+        <i class="fa-solid fa-gopuram me-1"></i> Di Sản Vật Thể
+    </a>
+</li>
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+    <!-- Khối nội dung chính (Main Content) -->
+    <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 style="color: #003366; font-size: 24px; border-bottom: 2px solid #003366; padding-bottom: 10px; text-transform: uppercase;">
+           Đền thờ Bác Hồ tại Trà Vinh: Biểu tượng lòng biết ơn của miền Nam
+        </h1>
+
+        <!-- Đoạn mở đầu -->
+        <p style="margin-top: 15px; text-align: justify;">
+            Nằm giữa vùng đất phù sa miền Tây Nam Bộ, đền thờ Bác Hồ tại tỉnh Trà Vinh không chỉ là một di tích lịch sử mà còn là biểu tượng của lòng biết ơn và sự kính yêu của người dân nơi đây dành cho vị lãnh tụ vĩ đại của dân tộc Việt Nam.
+        </p>
+
+        <!-- Khối hiển thị hình ảnh di sản -->
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-2-3256-1432.jpg.webp" alt="Khuôn viên đền thờ Bác Hồ tại tỉnh Trà Vinh." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Khuôn viên đền thờ Bác Hồ tại tỉnh Trà Vinh.
+            </figcaption>
+        </figure>
+
+        <!-- Các đoạn nội dung chi tiết -->
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Đền thờ Bác Hồ (Trà Vinh) tọa lạc trong khuôn viên trang nghiêm rộng 4,5 ha (thực tế toàn khu di tích rộng 4,5 ha) bao quanh bởi hàng cây xanh mát. Kiến trúc đền mộc mạc phản ánh đúng phẩm chất cao quý của Người. Chánh điện tôn trí bức tượng Bác ngồi ung dung, hiền hòa, thể hiện tình yêu thương vô hạn dành cho nhân dân.
+        </p>
+
+        <!-- hiển thị hình ảnh di sản -->
+         <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-12-7324-4444.jpg.webp" alt="Chân dung Bác Hồ trong chính điện." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Chân dung Bác Hồ trong chính điện.
+            </figcaption>
+        </figure>
+        <!-- các đoạn nội dung chi tiết -->
+         <p style="margin-bottom: 15px; text-align: justify;">
+            <li>
+               "Ngôi đền này được khởi công xây dựng vào ngày 10-3-1970. Lúc đó, bao bọc quanh đây có đến 20 đồn địch. Đồn địch gần nhất chỉ cách đền 300m, do đó quân địch bắn phá liên tục vào khu vực này. Bà con chỉ xây dựng đền được vào ban đêm, cho nên một ngôi đền với mái lá đơn sơ mà bà con phải xây dựng trong vòng 11 tháng. Đến ngày 26-1-1971 đền thờ Bác mới được khánh thành.
+            </li>
+            <li>
+                Trong lúc xây dựng đền có một công việc tưởng chừng đơn giản nhưng vô cùng khó khăn chính là tấm ảnh của Bác được thờ trong ngôi đền. Hoạ sĩ Phong Ba là người được giao nhiệm vụ này, ông rất lo lắng vì chưa từng được gặp Bác bao giờ. Tấm ảnh của Bác và dụng cụ vẽ cũng không có. Lúc đó, đồng chí Tư Côn (người dân tộc Khơ-me) một lần ra Hà Nội học tập, công tác đã được Bác tặng một bức ảnh nhỏ làm kỷ niệm. Sau đó, chú Tư Côn đã đem bức ảnh này tặng lại hoạ sĩ Phong Ba. Trong bảy ngày họa sĩ đã hoàn thành bức chân dung Bác và được bà con chấp nhận đưa vào thờ trong ngôi đền.
+            </li>
+            <li>
+               Khi đền được khánh thành đã trở thành cái gai trong mắt địch. Ngày 10-03-1971 quân giặc đã đốt ngôi đền. Bà con cùng nhau quyết tâm xây dựng lại ngôi đền. Mùa xuân năm 1972, ngôi đền chính thức được khánh thành lần thứ hai".
+            </li>
+        </p>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-16-5807-2072.jpg.webp" alt="Đền Thờ Bác tại Trà Vinh" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Đền Thờ Bác tại Trà Vinh
+            </figcaption>
+        </figure>
+        <li>
+           Khu di tích hiện trưng bày nhiều tượng, tranh ảnh, hiện vật lịch sử và tài liệu quý giá về cuộc đời, sự nghiệp của Bác. Những minh chứng này giúp du khách hiểu sâu sắc hơn về những cống hiến vĩ đại của Người cho sự nghiệp giải phóng dân tộc.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-5-6418-5213.jpg.webp" alt="Nhiều tài liệu về các hoạt động của Bác được trưng bày bên trong chính điện của đền." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Nhiều tài liệu về các hoạt động của Bác được trưng bày bên trong chính điện của đền.
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-10-5713-3335.jpg.webp" alt="Bức tượng Bác trong tư thế ngồi ung dung, nét mặt hiền hòa thể hiện sự gần gũi và tình yêu thương vô hạn của Người dành cho nhân dân." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Bức tượng Bác trong tư thế ngồi ung dung, nét mặt hiền hòa thể hiện sự gần gũi và tình yêu thương vô hạn của Người dành cho nhân dân.
+            </figcaption>
+        </figure>
+        <li>
+           Một điểm nổi bật trong đền, mô hình nhà sàn tại đây được thiết kế giống đến 97% nguyên bản nhà sàn Bác Hồ ở Phủ Chủ tịch ở Thủ đô Hà Nội.
+        </li>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_15/den-bac-anh-14-8134-486.jpg.webp" alt="Nhà sàn Bác Hồ tại tỉnh Trà Vinh." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Nhà sàn Bác Hồ tại tỉnh Trà Vinh.
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b568c59f4f13b8d2b69eddc274950d557cc/tp-bac-5.jpg.avif" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Đền thờ Bác Hồ được công nhận di tích lịch sử - văn hóa cấp quốc gia theo quyết định ngày 5/9/1989. Tháng 8/2022, Hiệp hội Du lịch Đồng bằng sông Cửu Long công nhận nơi đây là điểm du lịch tiêu biểu của vùng.
+            </figcaption>
+        
+        
+       
+        <figure style="margin: 25px 0; padding: 0; background-color: #ffffff; width: 100%;">
+    <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b56ae76744676ed3cdf5c9208c7e4920aea/tp-bac-14.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+            <hr>
+         <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b566fe8ca257238e1f94e8ea4883ac53c8e/tp-bac-12.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+            <hr>
+         <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b564195c346d8a8db427eb29d51b9ea9c5e/tp-bac-13.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+    <figcaption style="font-family: Arial, sans-serif; font-size: 14px; color: #555555; text-align: center; padding: 12px 15px 0 15px; background-color: #ffffff;">
+        Nhiều tư liệu, hiện vật quý liên quan đến cuộc đời hoạt động cách mạng của Bác tại nhà trưng bày.
+        
+        <div style="width: 60px; height: 2px; background-color: #666666; margin: 8px auto 0 auto;"></div>
+    </figcaption>
+</figure>
+       
+       <figure style="margin: 25px 0; padding: 0; background-color: #ffffff; width: 100%;">
+    <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b56df2e5a65ee13a3acdf03870cb482e80f/tp-bac-25.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+            <hr>
+         <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b566f0b0dd539393400e683be2945ff4379/tp-bac-24.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+            <hr>
+         <img src="https://cdn.tienphong.vn/images/0f4d38d2227b373916eabe283e3f387bc3e7f083ce81818aaddfa4440d040b56f9cf1da41336080c75a1de87c5461a35/tp-bac-23.jpg.avif" 
+         alt="Đền thờ Bác Hồ" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+    <figcaption style="font-family: Arial, sans-serif; font-size: 14px; color: #555555; text-align: center; padding: 12px 15px 0 15px; background-color: #ffffff;">
+        Một số hiện vật thời chiến tranh được trưng bày trong khuôn viên khu di tích, trong đó có chiếc xe jeep chính quyền cách mạng sử dụng tiếp quản Tỉnh trưởng tỉnh Vĩnh Bình (Trà Vinh) ngày 30/4/1975.
+        
+        <div style="width: 60px; height: 2px; background-color: #666666; margin: 8px auto 0 auto;"></div>
+    </figcaption>
+</figure>
+    </main>
+</body>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <!-- Cho phép trang hiển thị đúng trên mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Vinh Heritage - Di Sản Văn Hóa Trà Vinh</title>
+
+    <!-- ============================
+         THƯ VIỆN NGOÀI (CDN)
+    ============================= -->
+    <!-- Bootstrap 5: Framework CSS/JS giúp layout responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome: Thư viện icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts: Font chữ đẹp cho tiêu đề và nội dung -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (CSS Variables)
+           Dùng var(--tên-biến) ở bất kỳ đâu
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm - dùng cho header */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm - dùng cho navbar */
+            --accent-color: #d4af37;    /* Màu vàng gold - dùng cho điểm nhấn */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt - nền trang */
+        }
+
+        /* Reset font và cài đặt nền vân gỗ bao bọc 2 bên theo image_78a485.jpg */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?q=80&w=1920&auto=format&fit=crop'); /* Vân gỗ dọc hai bên rìa */
+            background-attachment: fixed;
+            background-size: contain;
+            background-repeat: repeat-y;
+            color: #333;
+        }
+
+        /* Font serif cho tiêu đề và logo navbar */
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        /* ============================
+           UTILITY CLASS TÙY CHỈNH
+        ============================= */
+        .bg-custom-header { background-color: var(--primary-color); }  /* Nền đỏ header */
+        .bg-custom-nav { background-color: var(--secondary-color); }    /* Nền xanh navbar */
+        .text-accent { color: var(--accent-color); }                    /* Chữ vàng gold */
+
+        /* ==========================================================================
+           BỔ SUNG CSS PHONG CÁCH BODY CỔ ĐIỂN THEO MẪU IMAGE_78A485.JPG
+           ========================================================================== */
+        
+        /* Khung chứa nội dung chính cố định ở giữa lòng vân gỗ */
+        .main-wrapper {
+            background-color: #fffdec; /* Màu giấy bản / kem nhạt giống ảnh mẫu */
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+        /* Thanh điều hướng dạng tab xám (Breadcrumbs) trên đầu body */
+        .custom-nav-tabs {
+            background: #e9e5d9;
+            border-bottom: 2px solid #8c5a3c;
+        }
+        .custom-nav-tabs .nav-link {
+            color: #444;
+            font-weight: 500;
+            border-radius: 0;
+            border: none;
+            position: relative;
+            padding: 8px 20px;
+        }
+        .custom-nav-tabs .nav-link.active {
+            background-color: #8c5a3c !important;
+            color: #fff !important;
+        }
+
+        /* Các hộp nội dung di sản (Heritage Card cổ điển) */
+        .heritage-box {
+            background-color: #faf7ee;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Hoa văn giấy chìm nghệ thuật */
+            border: 1px solid #d4c8b0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Thanh tiêu đề khối màu nâu đất nguyên bản ảnh mẫu */
+        .heritage-box-header {
+            background: linear-gradient(to bottom, #bd8352, #8c5a3c); 
+            color: #fff;
+            padding: 10px 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .heritage-box-body {
+            padding: 15px;
+        }
+
+        .heritage-box-body h5 a {
+            color: #1b4d3e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .heritage-box-body h5 a:hover {
+            color: #8c5a3c;
+        }
+
+        .meta-info {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        /* Danh sách gạch đầu dòng có ngôi sao màu cam/vàng giống ảnh mẫu */
+        .star-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .star-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .star-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #f39c12; /* Ngôi sao vàng cam */
+            font-size: 0.8rem;
+        }
+
+        /* Khung ảnh tư liệu cổ xưa ngả màu hoài niệm */
+        .ancient-img-box img {
+            border: 4px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            filter: sepia(30%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================
+         1. HEADER (Thanh tiêu đề trên cùng)
+    ============================= -->
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo bên trái -->
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">Di SẢN TRÀ VINH</span>
+            </div>
+
+            <!-- Thanh tìm kiếm + badge ngôn ngữ bên phải -->
+            
+        
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================
+         2. NAVBAR (Thanh điều hướng)
+    ============================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active text-accent" href="#" data-bs-toggle="dropdown" style="background-color: #123329;">
+                            Di sản phi vật thể
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
+                            <li><a class="dropdown-item" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                            <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================================
+         VỊ TRÍ THAY THẾ TOÀN BỘ PHẦN BODY MỚI (BÁM SÁT IMAGE_78A485.JPG)
+         ========================================================================== -->
+    <div class="container main-wrapper my-4 p-0">
+        
+        <!-- THANH ĐIỀU HƯỚNG BREADCRUMB (Dạng tab xám phía trên cùng của ảnh) -->
+        <div class="custom-nav-tabs d-flex align-items-center justify-content-between p-2">
+            
+            <!-- Ô tìm kiếm phụ bên góc phải như mẫu -->
+            <div class="input-group input-group-sm d-none d-sm-flex" style="width: 200px;">
+                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                <button class="btn" style="background-color: #8c5a3c; color: white;" type="button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- KHU VỰC CHÍNH CHIA LƯỚI 2 CỘT KHÔNG CÂN BẰNG -->
+        <div class="row g-3 p-3">
+            
+            <!-- --- CỘT TRÁI (LỚN): DANH SÁCH CHI TIẾT BÀI VIẾT DI SẢN --- -->
+            <div class="col-lg-8">
+
+                <!-- Khối 1: Tiếng nói chữ viết -->
+                <div class="heritage-box">
+                    <div class="heritage-box-header">Nghệ thuật trình diễn dân gian</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung1.html">Nghệ thuật Chầm riêng chà pây của đồng bào Khmer</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i> Được đưa vào Danh mục di sản văn hóa phi vật thể cấp quốc gia ngày 24/4/2013. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                   Đây là loại hình nghệ thuật độc xướng cổ xưa rất thịnh hành trong cộng đồng người Khmer từ những thập niên đầu thế kỷ XX. "Chầm riêng" có nghĩa là hát, còn "chà pây" là tên gọi của cây đàn chà pây đệm theo. Khi biểu diễn, các nghệ nhân sẽ dựa vào cốt truyện dân gian để ứng tác thành các đoạn thơ tùy hứng, xen kẽ giữa mỗi đoạn là câu nhạc đệm luyến láy từ tiếng đàn. Loại hình này chứa đựng những bài học giáo dục đạo đức, nhân sinh vô cùng sâu sắc.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Tiết mục độc tấu Chầm riêng chà pây của đội xã Tân Hiệp xuất sắc đoạt giải Nhất tại Hội diễn nghệ thuật quần chúng Khmer huyện Trà Cú.</li>
+                                    <li>Lối diễn mang đậm phong cách cá nhân nhờ khả năng ứng tác thơ ca linh hoạt theo cảm xúc riêng của từng nghệ nhân.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khối 2: Lễ hội cúng biển -->
+                <div class="heritage-box">
+                    <div class="heritage-box-header">Lễ hội truyền thống vùng biển</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung2.html">Lễ hội Cúng biển Mỹ Long, thị trấn Mỹ Long, huyện Cầu Ngang</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i> Được đưa vào Danh mục di sản văn hóa phi vật thể cấp quốc gia ngày 31/10/2013. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                    Còn được biết đến rộng rãi với tên gọi Lễ hội Nghinh Ông. Đây là lễ hội dân gian đặc sắc gắn liền với lịch sử, tín ngưỡng và phong tục tập quán lâu đời của ngư dân ven biển Cầu Ngang. Lễ hội diễn ra định kỳ hàng năm từ ngày 10 đến 12 tháng 5 âm lịch tại Miếu bà chúa xứ Mỹ Long nhằm thỉnh cầu mưa thuận gió hòa, mùa biển đầy ắp cá tôm và cầu bình an cho mọi nhà.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Chuỗi nghi thức lễ nghiêm trang: Lễ Tiền giảng, Lễ Nghinh Nam Hải, Lễ Tế Thần Nông và chiến sĩ trận vong, Lễ Chánh tế Chúa Xứ, Lễ Nghinh ngũ phương và Tống tàu.</li>
+                                    <li>Là không gian cộng cảm, giao lưu văn hóa và trao truyền đạo lý sống nghĩa tình của cư dân miền biển.</li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khối 3: Tri thức dân gian -->
+                <div class="heritage-box">
+                    <div class="heritage-box-header">Nghệ thuật mang tầm quốc tế</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung3.html">Nghệ thuật Đờn ca tài tử Nam Bộ tại tỉnh Trà Vinh</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i> Được UNESCO chính thức ghi danh là Di sản văn hóa phi vật thể đại diện của nhân loại vào năm 2013. Trà Vinh vinh dự là 1 trong 21 tỉnh, thành Nam Bộ đồng sở hữu di sản quý giá này. &nbsp;&nbsp; 
+                                  
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                    Đờn ca tài tử là sự hòa quyện tinh tế giữa "tiếng đờn và lời ca" bằng những giai điệu mộc mạc, gần gũi, dễ đi vào lòng người. Tại Trà Vinh, phong trào phát triển mạnh mẽ nhờ việc triển khai hiệu quả các Đề án bảo vệ và phát huy giá trị nghệ thuật Đờn ca tài tử giai đoạn 2014 – 2020 và giai đoạn 2022 – 2025, định hướng đến năm 2030, tạo nên sức lan tỏa sâu rộng trong đời sống tinh thần của người dân vùng sông nước.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Phần hòa tấu bài “Ngũ đối hạ 21 câu” của đơn vị huyện Tiểu Cần là điểm nhấn ấn tượng tại các kỳ Liên hoan.</li>
+                                    <li>Loại hình sinh hoạt văn hóa tinh thần quan trọng giúp nuôi dưỡng tâm hồn và phát huy tài năng âm nhạc dân gian của người dân địa phương.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <khối 4: Lễ hội OK OM BOK -->
+                 <div class="heritage-box">
+                    <div class="heritage-box-header">Lễ hội dân gian lớn nhất năm</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung4.html">Lễ hội Ok Om Bok của đồng bào Khmer ở Trà Vinh</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i> Được đưa vào Danh mục di sản văn hóa phi vật thể cấp quốc gia ngày 25/8/2014. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                   Trong tiếng Khmer, “Ok” nghĩa là đút, “Om Bok” nghĩa là cốm dẹp; Ok Om Bok là Lễ hội Đút cốm dẹp. Lễ hội còn có tên gọi khác là Lễ cúng Trăng - một tín ngưỡng nông nghiệp cổ xưa tôn vinh mặt trăng như một vị phúc thần cai quản thời tiết và bảo hộ mùa màng. Lễ hội diễn ra vào ngày 14, 15 tháng Ka-Đâk Khmer (khoảng ngày 13 - 16/10 âm lịch), được tổ chức quy mô cấp tỉnh thông qua chuỗi sự kiện "Tuần lễ văn hóa, du lịch" tại danh lam thắng cảnh Ao Bà Om.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Nghi thức tái hiện Lễ Cúng Trăng sân khấu hóa, diễu hành thả hoa đăng và đèn nước lung linh trên mặt hồ.</li>
+                                    <li>Hội đua ghe Ngo sôi nổi, thu hút đông đảo các đội tham gia trong tiếng reo hò, thắt chặt khối đại đoàn kết các dân tộc.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- khối 5: Nghệ thuật Rô-băm -->
+                  <div class="heritage-box">
+                    <div class="heritage-box-header">Kịch múa sân khấu cổ điển</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung5.html">Nghệ thuật kịch múa Rô-băm của người Khmer tỉnh Trà Vinh</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i>Được đưa vào Danh mục di sản văn hóa phi vật thể cấp quốc gia ngày 08/5/2017. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                   Đây là loại hình nghệ thuật trình diễn dân gian độc đáo xuất hiện tại Trà Vinh cách đây hơn 200 năm. Sân khấu Rô-băm là sự kết hợp nhuần nhuyễn giữa điệu múa, lời nói và lời hát để giải thích các tình tiết câu chuyện. Vừa mang tính giải trí cao, Rô-băm vừa hàm chứa triết lý giáo dục sâu sắc, góp phần định hình nhân cách và bản sắc văn hóa ứng xử của cộng đồng.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Nghệ nhân ưu tú Thạch Sang và vợ (bà Thạch Thị Dộ) được vinh danh là những "người giữ lửa" với tài năng chế tác mặt nạ chằn độc đáo.</li>
+                                    <li>Dàn nhạc ngũ âm phục vụ múa gồm các nhạc cụ truyền thống đặc trưng: trống lớn (Skô-thum), trống vỗ (Skô-sam-phô), chiêng, kồng và kèn Rô-bam.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- khối 6: Lễ hội Vu lan Thắng hội -->
+                  <div class="heritage-box">
+                    <div class="heritage-box-header">Tín ngưỡng giao thoa văn hóa</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung6.html">Lễ hội Vu lan Thắng hội đặc sắc tại huyện Cầu Kè</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i>Được công nhận là Di sản văn hóa phi vật thể quốc gia vào ngày 10/11/2023. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                   Đây là lễ hội truyền thống tiêu biểu của đồng bào dân tộc Hoa tại Cầu Kè, có sự phối hợp hài hòa giữa đại lễ Vu lan báo hiếu của Phật giáo và lễ vía Ông Bổn trong tín ngưỡng dân gian. Lễ hội diễn ra rộn ràng trong suốt tháng 7 âm lịch hàng năm tại 4 cơ sở tín ngưỡng lớn: Minh Đức Cung, Vạn Ứng Phong Cung, Vạn Niên Phong Cung và Niên Phong Cung. Vật phẩm dâng cúng đan xen cả đồ chay lẫn đồ mặn để thể hiện lòng biết ơn các vị thần bảo hộ.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Là minh chứng sống động cho sự gắn kết và tình đoàn kết bền chặt giữa ba dân tộc Kinh - Hoa - Khmer.</li>
+                                    <li>Không gian lễ hội phong phú với: Hội chợ thương mại - nông nghiệp, không gian ẩm thực địa phương và các trò chơi dân gian đặc sắc.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- khối 7: Lễ hội Đom Lơng Néak Tà -->
+                 <div class="heritage-box">
+                    <div class="heritage-box-header">Tín ngưỡng thành hoàng bản địa</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung7.html">Lễ hội Đom Lơng Néak Tà của người Khmer Trà Vinh</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i>Chính thức đưa vào Danh mục di sản văn hóa phi vật thể quốc gia ngày 21/02/2024. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                  Người Việt thường gọi kính trọng là Lễ hội Ông Tà. Trong tâm thức người Khmer, "Néak Tà" là một vị phúc thần, vị thần bảo hộ phum sóc. Lễ hội được tổ chức định kỳ hàng năm tại các ngôi miếu Ông Tà, tập trung nhiều nhất vào các tháng 3, 4, 5 âm lịch – thời điểm giao mùa từ miền khô sang mùa mưa, chuẩn bị cho mùa gieo cấy mới. Nghi lễ kéo dài trong 2 ngày với tính nhân văn sâu sắc, thể hiện nhu cầu tâm linh thiết yếu của cư dân bản địa.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Có nhiều nét tương đồng văn hóa sâu sắc với lễ hội Kỳ yên - Hạ điền tại các ngôi đình làng của người Kinh ở Nam Bộ.</li>
+                                    <li>Thời gian tổ chức linh hoạt theo từng phum sóc nhưng đều gắn chặt với chu kỳ sản xuất nông nghiệp lúa nước.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- khối 8: Nghề làm chiếu Cà Hom -->
+                 <div class="heritage-box">
+                    <div class="heritage-box-header">Làng nghề truyền thống lâu đời</div>
+                    <div class="heritage-box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5><a href="NoiDung8.html">Nghề làm chiếu Cà Hom của người Khmer xã Hàm Tân, huyện Trà Trú</a></h5>
+                                <div class="meta-info">
+                                    <i class="fa-regular fa-calendar"></i>Ghi danh vào Danh mục di sản văn hóa phi vật thể quốc gia ngày 09/8/2024. &nbsp;&nbsp; 
+                                    
+                                </div>
+                                <p class="small text-muted text-justify mb-0">
+                                 Chiếu Cà Hom là sản phẩm dệt lác thủ công tinh xảo, mang đậm nét hoa văn đặc trưng độc đáo của đồng bào Khmer Nam Bộ. Làng nghề hiện duy trì khoảng 91 hộ dệt thủ công bền bỉ, cung cấp ra thị trường hơn 32.800 sản phẩm mỗi năm. Mặc dù công việc vất vả và thu nhập không cao, các nghệ nhân nơi đây vẫn cần mẫn giữ nghề bằng cả tâm huyết và sự trân trọng giá trị truyền thống, giúp giải quyết việc làm và thúc đẩy kinh tế nông thôn phát triển.
+                                </p>
+                            </div>
+                            <div class="col-md-5 border-start border-light-subtle mt-2 mt-md-0">
+                                <ul class="star-list">
+                                    <li>Sản phẩm chứa đựng giá trị văn hóa và tính sáng tạo nghệ thuật cao, không thể trộn lẫn với bất kỳ làng nghề dệt chiếu nào trong vùng.</li>
+                                    <li>Đóng vai trò quan trọng trong chuyển dịch cơ cấu kinh tế và giữ gìn sợi dây văn hóa ngàn đời tại xã Hàm Tân.</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- CỘT PHẢI (NHỎ): THANH TÌM KIẾM & PHỤ TRỢ (SIDEBAR) --- -->
+            <div class="col-lg-4">
+
+                <!-- Thư mục tài liệu tham khảo -->
+                <div class="heritage-box">
+                    <div class="heritage-box-header">Thư mục tài liệu tham khảo</div>
+                    <div class="heritage-box-body p-2">
+                        <ul class="list-group list-group-flush small">
+                            <li class="list-group-item bg-transparent"><i class="fa-solid fa-book text-muted me-2"></i> Luật Bảo vệ dữ liệu cá nhân thể chế hóa theo tinh thần Nghị quyết 57-NQ/TW.</li>
+                            <li class="list-group-item bg-transparent"><i class="fa-solid fa-book text-muted me-2"></i> Nghiên cứu cơ chế đặc biệt về nhập quốc tịch theo Nghị quyết số 57-NQ/TW của Bộ Chính trị.</li>
+                            <li class="list-group-item bg-transparent"><i class="fa-solid fa-book text-muted me-2"></i> Một số kết quả triển khai Nghị quyết 57 về phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+
+                
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================
+         3. FOOTER
+    ============================= -->
+    <footer class="bg-dark text-white-50 pt-5 pb-3 border-top border-4 border-warning">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Cột 1: Giới thiệu dự án -->
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3 text-accent">
+                        <i class="fa-solid fa-gopuram me-2"></i>TRA VINH HERITAGE
+                    </h5>
+                    <p class="small">Sản phẩm số hóa phục vụ bảo tồn và phát triển văn hóa di sản của vùng đất Tây Nam Bộ Việt Nam.</p>
+                </div>
+
+                <!-- Cột 2: Liên kết nhanh -->
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Liên kết nhanh</h5>
+                    <ul class="list-unstyled d-flex flex-wrap gap-3 small">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Khám phá</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Bản đồ số</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Lịch sự kiện</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Góp ý tư liệu</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cột 3: Thông tin nhóm -->
+                <div class="col-md-4 text-md-end">
+                    <h5 class="text-white mb-3">Đơn vị thực hiện</h5>
+                    <p class="small mb-1">Đồ án Nhóm sinh viên Công nghệ thông tin</p>
+                    <p class="badge bg-success text-accent" style="background-color: var(--secondary-color) !important;">Lớp Học: DA25TTC</p>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3 border-secondary">
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small">
+                <span>&copy; 2026 Tra Vinh Heritage Project. All rights reserved.</span>
+                <div class="d-flex gap-3 fs-5 mt-2 mt-sm-0">
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (bao gồm Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

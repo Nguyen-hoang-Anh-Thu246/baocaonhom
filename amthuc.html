@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ẩm Thực Xứ Trà - Di Sản Văn Hóa Trà Vinh</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ với index.html)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm - dùng cho header */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm - dùng cho navbar */
+            --accent-color: #d4af37;    /* Màu vàng gold - dùng cho điểm nhấn */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt - nền trang */
+        }
+
+        /* Reset font và màu nền toàn trang */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        /* Font serif cho tiêu đề và logo */
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        /* Utility classes */
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+        .btn-accent:hover {
+            background-color: #bfa030;
+            color: #000;
+        }
+
+        /* ============================
+           BANNER TRANG CON (HERO BANNER)
+        ============================= */
+        .food-banner {
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://mia.vn/media/uploads/blog-du-lich/banh-tet-tra-cuon-01-1706664373.jpeg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ MÓN ĂN (FOOD CARD)
+        ============================= */
+        .food-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s;
+            height: 100%;
+}
+        .food-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .food-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Bộ lọc món ăn active */
+        .filter-btn.active {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            border-color: var(--primary-color) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">Di Sản Trà Vinh</span>
+            </a>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm món ăn...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item"> 
+                        <a class="nav-link text-white" href="index.html">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-accent active fw-bold" href="#" data-bs-toggle="dropdown">
+                            Khám phá di sản
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
+                            <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
+<li><a class="dropdown-item active bg-success" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                            <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="food-banner text-white">
+        <div>
+            <h1 class="display-4 text-accent text-uppercase">Ẩm Thực Trà Vinh</h1>
+            <p class="lead fs-5">Sự giao thoa tinh túy của hương vị Kinh - Khmer - Hoa</p>
+        </div>
+    </section>
+
+    <main class="container my-5">
+        
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <h2 class="text-uppercase position-relative d-inline-block pb-2 border-bottom border-danger border-2">Tinh Hoa Ẩm Thực</h2>
+            <p class="text-muted mt-3 px-md-5">Không chỉ có những ngôi chùa cổ kính, Trà Vinh còn níu chân du khách bởi một nền ẩm thực vô cùng phong phú và độc đáo. Sự kết hợp nguyên liệu bản địa hài hòa tạo nên những món ăn mang đậm bản sắc văn hóa vùng sông nước Nam Bộ.</p>
+        </div>
+
+      
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-4">
+    <div class="card food-card" style="cursor: pointer;" 
+         data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Bún Nước Lèo Trà Vinh" 
+         data-bs-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl3jKQmMiYM87xetO5hG8zX8sc9ZJzW5APA4y0hVtyVw&s=10" 
+         data-bs-desc="Không chỉ mang đậm hương vị vùng miền, bún nước lèo còn là sự giao thoa giữa văn hóa ẩm thực các dân tộc Việt, Hoa và Khmer. Bún nước lèo là sự kết hợp hài hòa giữa nhiều nguyên liệu như: Thịt heo quay, bò hóc, rau sống (bắp chuối, rau muống bào, bông súng, v.v), bên cạnh đó còn cá, tôm giúp món ăn thêm đậm đà hương vị.
+
+Khi ăn bạn sẽ cảm nhận được vị nước lèo thanh ngọt, mắm bò hóc đậm đà cùng rau sống, thịt heo quay giòn rụm.">
+         
+        <img src="https://cdn.tgdd.vn/Files/2020/07/01/1266749/cach-nau-bun-nuoc-leo-soc-trang-ngon-dam-da-chuan-vi-an-mot-lan-la-nho-mai-202208301437543598.jpg" class="card-img-top" alt="Bún nước lèo">
+        <div class="card-body d-flex flex-column">
+            <span class="badge bg-danger mb-2 align-self-start">Món Ăn Mặn đặc sản</span>
+            <h5 class="card-title fs-4">Bún Nước Lèo Trà Vinh</h5>
+            <p class="card-text text-muted small flex-grow-1">Linh hồn ẩm thực Trà Vinh với sự kết hợp hoàn hảo từ mắm bò hóc truyền thống của người Khmer, thịt heo quay giòn rụm của người Hoa và tôm cá tươi ngon của người Kinh.</p>
+            <hr class="text-muted my-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Khắp tỉnh Trà Vinh</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card food-card" style="cursor: pointer;"
+                data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Bánh Tét Trà Cuôn" 
+         data-bs-img="https://ticotravel.com.vn/wp-content/uploads/2024/08/banh-tet-tra-cuon-6.jpg" 
+         data-bs-desc="Là một đặc sản trứ danh của tỉnh Trà Vinh, đến đây vào bất cứ dịp nào bạn cũng có thể được thưởng thức món bánh thơm ngon, đậm bản sắc vùng miền này. Đặc trưng của bánh tét Trà Cuôn là nếp có 3 màu xanh, cam, tím, cùng với vị bùi của đậu xanh, vị béo của thịt mỡ cùng vị mặn đậm đà của trứng muối và thịt ba rọi.">
+                    <img src="https://mia.vn/media/uploads/blog-du-lich/banh-tet-tra-cuon-01-1706664373.jpeg" class="card-img-top" alt="Bánh tét Trà Cuôn">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-success mb-2 align-self-start">Quà tặng / Bánh dân gian</span>
+                        <h5 class="card-title fs-4">Bánh Tét Trà Cuôn</h5>
+                        <p class="card-text text-muted small flex-grow-1">Thương hiệu bánh tét nổi tiếng khắp Nam Bộ. Hạt nếp được chọn lọc kỹ, ngấm nước lá ngót tạo màu xanh mướt tự nhiên, ôm trọn phần nhân thịt, mỡ và trứng muối béo bùi.</p>
+                        <hr class="text-muted my-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Huyện Cầu Ngang</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card food-card" style="cursor: pointer;"
+                data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Dừa Sáp Cầu Kè" 
+         data-bs-img="https://images.vietnamtourism.gov.vn/vn//images/2024/thang_5/0805.festival_100_nam_cay_dua_sap_tra_vinh_2.jpg" 
+         data-bs-desc="Dừa sáp là một đặc sản Trà Vinh hiếm có, nếu đã đến Trà Vinh định phải thử, đặc biệt ở huyện Cầu Kè. Dừa sáp có phần cơm dày, mềm dẻo, béo ngậy và nước dừa sệt, trong veo như sương sa. Dừa sáp được yêu thích bởi thực khách nhờ hương vị độc đáo, có thể chế biến thành nhiều món ngon như: Dừa sáp dầm sữa, kem dừa, sinh tố, v.v.">
+                    <img src="https://www.conngongvang.com/wp-content/uploads/2019/05/dua_sap_cau_ke_tra_vinh.jpg" class="card-img-top" alt="Dừa sáp Cầu Kè">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-warning text-dark mb-2 align-self-start">Trái cây đặc sản quý hiếm</span>
+                        <h5 class="card-title fs-4">Dừa Sáp Cầu Kè</h5>
+                        <p class="card-text text-muted small flex-grow-1">Loại quả "độc nhất vô nhị" với phần cơm dừa dày dặn, mềm dẻo như sáp và nước dừa sền sệt, béo ngậy. Thường được chế biến thành sinh tố hoặc ăn kèm đường đá.</p>
+                        <hr class="text-muted my-2">
+<div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Huyện Cầu Kè</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+            
+                <div class="card food-card" style="cursor: pointer;"
+                data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Bánh Canh Bến Có" 
+         data-bs-img="https://mia.vn/media/uploads/blog-du-lich/banh-canh-ben-co-1-1707056823.jpg" 
+         data-bs-desc="Đây là đặc sản trứ danh gắn liền với vùng đất ấp Bến Có, xã Nguyệt Hóa, huyện Châu Thành, tỉnh Trà Vinh suốt hơn 20 năm qua. Bánh canh Bến Có có sợi bánh dày, dai được làm từ bột gạo.
+
+Bánh canh có nước dùng ngon ngọt được ninh từ xương heo, có màu trong, rất thơm ngon, khi ăn bạn không cần cho thêm gia vị. Đây là món ăn được chế biến đơn giản nhưng lại đem đến hương vị đậm đà và khó quên cho thực khách.">
+                    <img src="https://www.packvn.com/wp-content/uploads/2021/12/Banh-canh-Ben-Co-Mon-an-Tra-Vinh-voi-bot-gao-dac-trung-rieng-biet1.png" class="card-img-top" alt="Bánh canh Bến Có">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-danger mb-2 align-self-start">Món Ăn Mặn nổi tiếng</span>
+                        <h5 class="card-title fs-4">Bánh Canh Bến Có</h5>
+                        <p class="card-text text-muted small flex-grow-1">Món ăn có lịch sử hơn vài mươi năm tại chân cầu Bến Có. Sợi bánh canh làm từ gạo lúa mùa dai mềm, nước dùng hầm xương trong vắt ngọt thanh cùng ngập tràn lòng heo tươi ngon.</p>
+                        <hr class="text-muted my-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Huyện Châu Thành</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+            
+                <div class="card food-card" style="cursor: pointer;"
+                data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Chù Ụ Rang Me" 
+         data-bs-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeDBCumbv-XO_qDTU7O08hgDZw_YjBR0lT7ysDNMCrCA&s=10" 
+         data-bs-desc="Chù ụ có hình thù kỳ quặc, trông giống một con cua lớn, được phát hiện ở vùng biển Ba Động, tỉnh Trà Vinh và dần dần trở thành món đặc sản địa phương hấp dẫn, ngon nức tiếng.
+
+Chù ụ sau khi bắt về sẽ được sơ chế sạch sẽ, loại bỏ yếm, để ráo. Sau đó đem xào với dầu, hành, tỏi, thêm nước cốt me, nêm nếm gia vị vừa ăn là món ăn đã hoàn thành. Khi ăn, thịt chù ụ có vị ngọt, béo, thơm thơm và vị chua ngọt của sốt me đánh thức vị giác vô cùng hấp dẫn.">
+                    <img src="https://dulichthuduc.com.vn/vnt_upload/news/MIEN-TAY/tra-vinh/chu_u_rang_me_thuductravel1.jpg" class="card-img-top" alt="Chù khú Trà Vinh">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-info text-dark mb-2 align-self-start">Hải sản vùng duyên hải</span>
+                        <h5 class="card-title fs-4">Chù Ụ Rang Me</h5>
+                        <p class="card-text text-muted small flex-grow-1">Loài họ hàng với cua, ba khía nhưng có vỏ ngoài sần sùi chỉ sống ở vùng rừng ngập mặn Duyên Hải. Khi rang me, vỏ chù khú giòn tan, thịt ngọt đậm đà vô cùng bắt miệng.</p>
+                        <hr class="text-muted my-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Thị xã Duyên Hải</small>
+                        </div>
+                    </div>
+</div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card food-card" style="cursor: pointer;"
+                data-bs-toggle="modal" 
+         data-bs-target="#foodModal" 
+         data-bs-title="Bánh Xèo Trà Vinh" 
+         data-bs-img="https://inhat.vn/wp-content/uploads/2022/06/banh-xeo-tra-vinh.jpg" 
+         data-bs-desc="Bánh xèo là món ăn dân dã nhưng luôn có sức hút đặc biệt. Bánh xèo Trà Vinh nổi bật với lớp vỏ bánh giòn tan, màu vàng ươm đẹp mắt, được làm từ bột gạo pha nước cốt dừa, nghệ và hành lá. Nhân bánh đa dạng với tôm tươi, thịt ba chỉ, giá đỗ, đậu xanh và củ sắn.
+
+Khi ăn, bánh xèo được cuốn trong lá cải xanh hoặc xà lách, kèm theo nhiều loại rau thơm như tía tô, húng quế, diếp cá. Nước chấm chua ngọt pha từ nước mắm, đường, chanh, tỏi ớt là linh hồn của món ăn, giúp cân bằng hương vị và tăng thêm sự hấp dẫn. Tiếng xèo xèo khi đổ bánh, mùi thơm lừng lan tỏa khắp không gian chắc chắn sẽ khiến bạn không thể cưỡng lại.">
+                    <img src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwevxl73l68r05@resize_ss640x400" class="card-img-top" alt="Bánh xèo Trà Vinh">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-success mb-2 align-self-start">Ẩm thực dân dã</span>
+                        <h5 class="card-title fs-4">Bánh Xèo Trà Vinh</h5>
+                        <p class="card-text text-muted small flex-grow-1">Bánh xèo Trà Vinh mang đậm phong vị miền Tây Nam Bộ với vỏ bánh vàng óng, giòn rụm từ nước cốt dừa và bột gạo, kết hợp phần nhân phong phú từ tôm, tép, thịt ba rọi, giá đỗ. Điểm nhấn làm nên thương hiệu ở đây là rổ rau rừng, rau sống cực kỳ đa dạng và nước mắm chua ngọt pha rất vừa vị.</p>
+                        <hr class="text-muted my-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary"><i class="fa-solid fa-location-dot me-1"></i> Cù lao Long Trị / Huyện Cầu Kè</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white-50 pt-5 pb-3 border-top border-4 border-warning">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3 text-accent">
+                        <i class="fa-solid fa-gopuram me-2"></i>TRA VINH HERITAGE
+                    </h5>
+                    <p class="small">Sản phẩm số hóa phục vụ bảo tồn và phát triển văn hóa di sản của vùng đất Tây Nam Bộ Việt Nam.</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Liên kết nhanh</h5>
+                    <ul class="list-unstyled d-flex flex-wrap gap-3 small">
+                        <li><a href="index.html" class="text-white-50 text-decoration-none">Khám phá</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Bản đồ số</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Lịch sự kiện</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Góp ý tư liệu</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 text-md-end">
+                    <h5 class="text-white mb-3">Đơn vị thực hiện</h5>
+                    <p class="small mb-1">Đồ án Nhóm sinh viên Công nghệ thông tin</p>
+                    <p class="badge bg-custom-nav text-accent">Lớp Học: DA25TTC</p>
+                </div>
+            </div>
+<hr class="mt-4 mb-3 border-secondary">
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small">
+                <span>&copy; 2026 Tra Vinh Heritage Project. All rights reserved.</span>
+                <div class="d-flex gap-3 fs-5 mt-2 mt-sm-0">
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade" id="foodModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="foodModalLabel">Chi tiết món ăn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImg" src="" class="img-fluid rounded mb-3 w-100" style="max-height: 400px; object-fit: cover;">
+                <p id="modalDesc" class="fs-5"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const foodModal = document.getElementById('foodModal');
+    foodModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        foodModal.querySelector('.modal-title').textContent = button.getAttribute('data-bs-title');
+        foodModal.querySelector('#modalImg').src = button.getAttribute('data-bs-img');
+        foodModal.querySelector('#modalDesc').textContent = button.getAttribute('data-bs-desc');
+    });
+</script>
+</body>
+</html>

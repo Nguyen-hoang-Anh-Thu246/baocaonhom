@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <!-- Nút hamburger hiện trên mobile khi menu bị thu gọn -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Danh sách menu - ẩn/hiện theo nút hamburger trên mobile -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+    <a class="nav-link text-white" href="vatthe.html">
+        <i class="fa-solid fa-gopuram me-1"></i> Di Sản Vật Thể
+    </a>
+</li>
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+    <!-- Khối nội dung chính (Main Content) -->
+    <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 style="color: #003366; font-size: 24px; border-bottom: 2px solid #003366; padding-bottom: 10px; text-transform: uppercase;">
+            CHÙA ÂNG – NGÔI CHÙA KHMER CỔ TUYỆT ĐẸP Ở TRÀ VINH
+        </h1>
+
+        <!-- Đoạn mở đầu -->
+        <p style="margin-top: 15px; text-align: justify;">
+            Nhắc tới Trà Vinh, người ta nghĩ đến miền đất của những ngôi chùa Khmer cổ kính cùng những di tích lịch sử mang nhiều huyền thoại, gắn liền với hành trình khai phá phương Nam. Toàn tỉnh Trà Vinh có rất nhiều ngôi chùa Khmer, trong đó chùa Âng được xem là một trong những ngôi chùa lớn, tiêu biểu cho các ngôi chùa Khmer trong tỉnh.
+        </p>
+
+        <!-- Khối hiển thị hình ảnh di sản -->
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chua-ang-1.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Chùa Âng, gọi theo ngôn ngữ Paly là Wat Angkor Raig Borei. Ảnh: Aaphoto
+            </figcaption>
+        </figure>
+
+        <!-- Các đoạn nội dung chi tiết -->
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Chùa Âng, gọi theo ngôn ngữ Paly là Wat Angkor Raig Borei, tọa lạc tại Phường 8, thành phố Trà Vinh. Ngôi chùa nằm trong cụm danh thắng Ao Bà Om và bảo tàng văn hóa dân tộc Khmer, là điểm nhấn nổi bật không thể bỏ qua trong bản đồ du lịch Trà Vinh.
+        </p>
+
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Từ xa nhìn vào, bạn sẽ thấy những tòa nhà trong chùa với lối kiến trúc hình tháp vươn thẳng lên trời, mang nét đẹp nguy nga, tráng lệ nhưng cũng không kém phần trang nghiêm.
+        </p>
+        <!-- hiển thị hình ảnh di sản -->
+         <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Toàn cảnh Chùa nhìn từ trên cao
+            </figcaption>
+        </figure>
+        <!-- các đoạn nội dung chi tiết -->
+         <p style="margin-bottom: 15px; text-align: justify;">
+            <li>
+                Lịch sử lâu đời: Xây dựng từ năm 990 (thế kỷ thứ 10), chánh điện đến nay vẫn giữ nguyên trạng kiến trúc từ năm 1842.
+            </li>
+            <li>
+                Quần thể kiến trúc: Gồm nhiều hạng mục như tăng xá, giảng đường, chánh điện hướng về phía Đông để độ trì chúng sinh.
+            </li>
+            <li>
+                Nghệ thuật tinh xảo: Cổng chùa được điêu khắc kỳ công với hình tượng chằn, tiên nữ, chim thần truyền thống của người Khmer.
+            </li>
+        </p>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-1.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Cổng chùa
+            </figcaption>
+        </figure>
+        <li>
+            Từ cổng chính vào là một lối đi rộng giữa hai hàng sao cổ thụ thân to, cao vút tạo ra thế uy nghiêm cho ngôi chùa. Lối đi ngang qua hào nước rộng bao quanh làm cho bầu không khí trong lành, dịu mát.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang03.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Hào nước rộng bao quanh làm cho bầu không khí luôn trong lành
+            </figcaption>
+        </figure>
+        <li>
+            Khuôn viên chùa rộng 4 ha với nhiều chủng loài thực vật đặc hữu trên đất giồng cát như sao, dầu, tre, trúc… trong đó có hàng trăm gốc sao, dầu cổ thụ quanh năm che mát ngôi chùa cổ kính.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang02.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Khuôn viên chùa rộng rãi rợp bóng cây xanh
+            </figcaption>
+        </figure>
+        <li>
+            Vị trí trung tâm: Là nơi thờ Phật, hội tụ tinh hoa nghệ thuật kiến trúc, hội họa và điêu khắc Khmer.
+        </li>
+        <li>
+            Hệ thống cột trụ: Toàn bộ công trình được trụ đỡ kiên cố bởi 18 chiếc cột làm từ chất liệu gỗ quý.
+        </li>
+        <li>
+            Nội thất lộng lẫy: Không gian bên trong sở hữu 12 trụ cột trang trí hình rồng, sơn son thếp vàng uy nghi.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaangtravinh.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Chánh điện
+            </figcaption>
+        </figure>
+        <li>
+            Cấu trúc độc đáo: Hệ thống mái gồm ba cấp có màu sắc hài hòa, hai mái trên cùng thiết kế rất cao và dốc uy nghi.
+        </li>
+        <li>
+            Chạm khắc công phu: Hai đầu hồi được đóng kín bằng hai tấm gỗ hình tam giác với các họa tiết điêu khắc vô cùng tinh xảo.
+        </li>
+        <li>
+            Biểu tượng linh thiêng: Gò mái trang trí thần rắn Naga mào cong vút, tượng trưng cho cầu nối giữa trần gian và cõi Niết bàn.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-3.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Quanh chính điện có trụ cột, hàng rào với đầu thần Bayon bốn mặt.
+            </figcaption>
+        </figure>
+        <li>
+            Bốn bức tường chánh điện là những bức bích họa đặc sắc thể hiện tư tưởng Phật giáo, thông qua con đường tu hành của Phật Thích Ca. Trên trần là bốn bức bích họa hoành tráng thể hiện bốn giai đoạn trong cuộc đời Phật Thích Ca là Phật đản sanh, Phật xuất gia, Phật thành đạo và Phật nhập niết bàn.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Những bức bích họa đặc sắc về con đường tu hành của Phật Thích Ca
+            </figcaption>
+        </figure>
+        <li>
+            Bệ thờ hoa sen: Được sơn son thếp vàng với các đường nét chạm khắc gỗ hình hoa lá, muông thú vô cùng tinh xảo.
+        </li>
+        <li>
+            Thờ độc tôn: Chánh điện chỉ thờ duy nhất một tượng Đức Phật Thích Ca lớn ở tư thế ngồi thiền định uy nghi.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang3-1.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Bên trong chánh điện
+            </figcaption>
+        </figure>
+        <li>
+            Phía trước ngôi chánh điện là ngôi tháp chứa di cốt các vị sư cả trụ trì chùa qua các thời kỳ. Điều đặc biệt, đây là ngôi tháp năm ngọn duy nhất trong các ngôi chùa Khmer Trà Vinh. Tháp năm ngọn là sự ảnh hưởng tư tưởng Ấn Độ giáo về vũ trụ, thiên nhiên và con người.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chua-ang-2.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Ngôi tháp chứa di cốt các vị sư cả trụ trì chùa qua các thời kỳ
+            </figcaption>
+        </figure>
+        <li>
+            Giá trị đỉnh cao: Đạt đến trình độ đỉnh cao về nghệ thuật kiến trúc, hội họa và điêu khắc đậm đà bản sắc Khmer.
+        </li>
+        <li>
+            Giao lưu văn hóa: Là niềm tự hào của Trà Vinh với sự giao thoa văn hóa độc đáo giữa các dân tộc Việt, Hoa, Ấn Độ, Thái Lan.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaangtravinh-1.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Những họa tiết điêu khắc đậm đà bản sắc văn hóa Khmer
+            </figcaption>
+        </figure>
+        <ul>
+            <li>
+                Trung tâm văn hóa: Nơi bảo tồn, truyền thừa các giá trị văn hóa truyền thống của người Khmer qua nhiều thế hệ.
+            </li>
+            <li>
+                Di tích quốc gia: Được xếp hạng Di tích lịch sử – văn hóa cấp quốc gia từ năm 1994 nhờ những giá trị lớn lao.
+            </li>
+            <li>
+                Điểm hẹn lễ hội: Nơi hội tụ của đồng bào các dân tộc trong các lễ hội lớn như Chol-chnam-thmay, Dolta, Ok-om-bok.
+            </li>
+        </ul>
+    </main>
+</body>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://ta-img.tatinta.com/resize/1024/webp/destination/file-1731938173316.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+    <a class="nav-link text-white" href="vatthe.html">
+        <i class="fa-solid fa-gopuram me-1"></i> Di Sản Vật Thể
+    </a>
+</li>
+
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+    <!-- Khối nội dung chính (Main Content) -->
+    <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 style="color: #003366; font-size: 24px; border-bottom: 2px solid #003366; padding-bottom: 10px; text-transform: uppercase;">
+            Chùa Kompong Chrây: Vẻ đẹp kiến trúc Khmer và nét tĩnh lặng giữa lòng Trà Vinh
+        </h1>
+
+        <!-- Đoạn mở đầu -->
+        <p style="margin-top: 15px; text-align: justify;">
+            Chùa Kompong Chrây, hay còn gọi là Chùa Hang, là ngôi chùa Phật giáo Nam tông Khmer nổi tiếng, tọa lạc tại khóm 3, thị trấn Châu Thành, cách trung tâm thành phố Trà Vinh hơn 5 km về hướng nam, theo quốc lộ 54.
+
+Chùa được xây dựng vào cuối thế kỷ 18, với kiến trúc đặc trưng của người Khmer Nam Bộ. Ngôi chùa này được bao quanh bởi một khung cảnh thiên nhiên tuyệt đẹp, với hàng cây cổ thụ rợp bóng, khiến không gian nơi đây trở nên yên bình, dễ chịu.
+        </p>
+
+        <!-- Khối hiển thị hình ảnh di sản -->
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-112730-1637-7272.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Chùa Kompong Chrây được bao quanh bởi một hàng cây cổ thụ rợp bóng.
+            </figcaption>
+        </figure>
+
+        <!-- Các đoạn nội dung chi tiết -->
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Chùa Hang không chỉ là một công trình kiến trúc độc đáo mà còn chứa đựng nhiều câu chuyện lịch sử và huyền thoại. Theo truyền thuyết, ngôi chùa này từng là nơi cư trú của các bậc thầy tu hành nổi tiếng.
+        </p>
+
+        <!-- hiển thị hình ảnh di sản -->
+         <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152841-2438-8700.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+           <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-112915-6881-3342.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Chính điện Chùa Kompong Chrây (Chùa Hang).
+            </figcaption>
+        </figure>
+        <!-- các đoạn nội dung chi tiết -->
+         <p style="margin-bottom: 15px; text-align: justify;">
+            <li>
+                Những dấu vết của quá trình hình thành và phát triển của chùa vẫn còn được lưu lại qua từng viên gạch, từng bức tượng, những chi tiết chạm khắc tinh xảo trên các cửa chính và mái chùa.
+            </li>
+            
+        </p>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-113039-4918-4896.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Những dấu ấn lịch sử của chùa được lưu giữ trên từng nét chạm khắc tinh xảo.
+            </figcaption>
+        </figure>
+        <li>
+           Sư Chơn Sỹ - Trụ trì Chùa Kompong Chrây (Chùa Hang) - cho biết: "Người ta gọi Chùa Hang vì thấy cổng giống cái hang. Tên thật của chùa là Kompong Chrây. Kompong: Bến đò, bến xuồng. Chrây: Cây đa.
+        </li>
+        <li>
+            <i>Hồi xưa muốn làm một ngôi chùa dù lớn hay nhỏ thì sư cả hoặc phật tử phải đi xin tên. Khi đó trước chùa có một bến xuồng để phật tử đi làm ruộng. Ở bên có một cây đa rất to. Thành ra, người đặt tên cho chùa đã lấy hai tên đó ghép lại với nhau".</i>
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang03.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Hào nước rộng bao quanh làm cho bầu không khí luôn trong lành
+            </figcaption>
+        </figure>
+        <li>
+            Khuôn viên chùa rộng 4 ha với nhiều chủng loài thực vật đặc hữu trên đất giồng cát như sao, dầu, tre, trúc… trong đó có hàng trăm gốc sao, dầu cổ thụ quanh năm che mát ngôi chùa cổ kính.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152926-7420-986.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Kiến trúc của Chùa Hang mang đậm nét văn hóa Khmer.
+            </figcaption>
+        </figure>
+        <li>
+           Chùa có mái vòm cong, nhiều cột đá lớn vững chãi được chạm khắc tỉ mỉ hình ảnh Phật, các vị thần và họa tiết hoa văn đặc sắc. Cổng chùa được trang trí công phu tạo nên một không gian tôn nghiêm và huyền bí.
+        </li>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152806-1274-8488.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-113224-3777-4765.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              <i>Kiến trúc của Chùa Hang mang đậm nét văn hoá của người Khmer.</i>
+            </figcaption>
+        </figure>
+        <li>
+            Ngoài chính điện, nơi thờ Phật, chùa Hang còn có các khu vực như tháp chuông, khu mộ tháp lưu giữ những di tích lịch sử quý giá của cộng đồng Khmer.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152702-3132-9014.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152631-9803-1736.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152552-7004-4834.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-113429-8212-3327.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Lối vào Chùa Hang.
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-112614-9567-221.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <hr>
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_31/anh-chup-man-hinh-2025-01-31-luc-152300-8759-7222.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Đến Chùa Hang, du khách không chỉ được chiêm ngưỡng vẻ đẹp của kiến trúc chùa mà còn cảm nhận được sự bình yên mà ngôi chùa này mang lại.
+            </figcaption>
+        </figure>
+        <li>
+           Chùa Hang là một không gian lý tưởng để tìm lại sự thanh bình trong tâm hồn, để hòa mình vào thiên nhiên, cũng như để hiểu thêm về đời sống, văn hóa và tín ngưỡng của cộng đồng người Khmer ở miền Tây Nam Bộ.
+        </li>
+       
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://image.plo.vn/w2000/Uploaded/2026/xqeioxdrkw/2025_01_16/anh-chup-man-hinh-2025-01-16-luc-114012-7921-2953.png.webp" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              
+            </figcaption>
+        </figure>
+        
+    </main>
+</body>

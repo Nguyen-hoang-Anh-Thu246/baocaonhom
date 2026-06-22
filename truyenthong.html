@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làng Nghề Truyền Thống - Di Sản Trà Vinh</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+        .text-primary-custom { color: var(--primary-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            /* Thay ảnh nền bằng ảnh mang tính chất làng nghề gốm/chiếu/điêu khắc */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://image.vietnam.travel/sites/default/files/2021-04/Tra%20Vinh%20-%20vietnam%20travel.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THÈ DI SẢN LÀNG NGHỀ (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Huy hiệu định vị làng nghề */
+        .location-badge {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRA VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm làng nghề...">
+                    <button class="btn btn-outline-light" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-custom-nav navbar-dark sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vatthe.html">Di Sản Vật Thể</a></li>
+                    <li class="nav-item"><a class="nav-link" href="phivatthe.html">Di Sản Phi Vật Thể</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="truyenthong.html">Làng Nghề Truyền Thống</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Lễ Hội & Sự Kiện</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-banner text-center text-white">
+        <div class="container">
+            <h1 class="display-4 text-accent mb-3">LÀNG NGHỀ TRUYỀN THỐNG</h1>
+            <p class="lead col-lg-8 mx-auto fw-light">Nơi lưu giữ hồn quê Nam Bộ, tinh hoa bàn tay Việt và sự giao thoa văn hóa đặc sắc Kinh - Khmer - Hoa trên vùng đất Trà Vinh.</p>
+        </div>
+    </section>
+
+    <main class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <h2 class="h3 text-primary-custom mb-0 border-start border-4 border-danger ps-2">Danh Sách Làng Nghề Nổi Bật</h2>
+            <div class="d-flex gap-2">
+               
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="heritage-card">
+                    <img src="https://cly.1cdn.vn/2021/07/23/dantoctongiao.congly.vn-upload-content_img-2021-0723-_lang-nghe-dan-lat-cac-san-pham-tu-tre-truc-o-ap-giong-dinh-xa-dai-an-huyen-_anh_6.jpg" class="card-img-top" alt="Làng nghề chiếu Cà Hom">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="location-badge"><i class="fa-solid fa-location-dot me-1"></i> xã Đại An, huyện Trà Cú</div>
+                            <h3 class="h5 card-title text-primary-custom">Làng nghề đan lát Đại An</h3>
+                            <p class="card-text text-muted small text-justify">Làng nghề đan lát truyền thống tại xã Đại An, huyện Trà Cú, tỉnh Trà Vinh là một trong những làng nghề tiểu thủ công nghiệp lâu đời, nổi tiếng với các sản phẩm thủ công mỹ nghệ tinh xảo từ tre và trúc, góp phần bảo tồn văn hóa của đồng bào Khmer Nam Bộ.</p>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="heritage-card">
+                    <img src="https://langngheviet.com.vn/stores/news_dataimages/langnghevietcomvn/092020/15/17/chieu-ca-hom-tinh-hoa-nghe-lam-chieu-44-.7601.jpg" class="card-img-top" alt="Làng nghề điêu khắc gỗ">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="location-badge"><i class="fa-solid fa-location-dot me-1"></i> xã Hàm Tân, huyện Trà Cú</div>
+                            <h3 class="h5 card-title text-primary-custom">Làng nghề dệt chiếu Cà Hom - Bến Bạ</h3>
+                            <p class="card-text text-muted small text-justify">Hình thành từ cuối thế kỷ XIX, đây là một trong những làng nghề lâu đời của đồng bào Khmer được công nhận là Di sản văn hóa phi vật thể Quốc gia.</p>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="heritage-card">
+                    <img src="https://www.namphuongtourist.com/wp-content/uploads/2013/07/lang-nghe-banh-tet-Tra-Vinh1.jpg" class="card-img-top" alt="Bánh Tét Trà Cuôn">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="location-badge"><i class="fa-solid fa-location-dot me-1"></i> Xã Kim Hòa, Huyện Cầu Ngang</div>
+                            <h3 class="h5 card-title text-primary-custom">Làng Nghề Bánh Tét Trà Cuôn</h3>
+                            <p class="card-text text-muted small text-justify">đây là làng nghề ẩm thực nổi tiếng với bề dày lịch sử hơn nửa thế kỷ. Bánh tét Trà Cuôn nức tiếng nhờ nếp dẻo thơm, nhân thịt mỡ, đậu xanh, lòng đỏ trứng muối đậm đà, được vinh danh là một trong những ẩm thực tiêu biểu của Việt Nam.</p>
+                        </div>
+                  
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="heritage-card">
+                    <img src="https://tuilanguoimientay.vn/wp-content/uploads/2021/11/Lang-nghe-thu-cong-Duc-My..jpg.webp" class="card-img-top" alt="Làng nghề đan lát Đức Mỹ">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="location-badge"><i class="fa-solid fa-location-dot me-1"></i> Xã Đức Mỹ, Huyện Càng Long</div>
+                            <h3 class="h5 card-title text-primary-custom">Làng Nghề Đan Lát Đức Mỹ</h3>
+                            <p class="card-text text-muted small text-justify">Tận dụng nguyên liệu lác, lục bình có sẵn, người dân đã khéo léo tạo nên các sản phẩm thủ công mỹ nghệ xuất khẩu vô cùng tinh tế(ở đây cũng là nhà của thành viên trong nhóm btw).</p>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="heritage-card">
+                    <img src="https://suckhoedoisong.qltns.mediacdn.vn/Images/duylinh/2017/10/19/DSCN4660_resize.jpg" class="card-img-top" alt="Nghề làm cốm dẹp Ba So">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="location-badge"><i class="fa-solid fa-location-dot me-1"></i> Xã Nhị Trường, Huyện Cầu Ngang</div>
+                            <h3 class="h5 card-title text-primary-custom">Nghề Làm Cốm Dẹp Ba So</h3>
+                            <p class="card-text text-muted small text-justify">) là cái nôi sản xuất cốm dẹp truyền thống của đồng bào dân tộc Khmer. Nức tiếng với hương vị dẻo thơm, bùi béo, đây là điểm đến văn hóa, ẩm thực và trải nghiệm thú vị.</p>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        
+    </main>
+
+    <footer class="bg-dark text-white pt-4 pb-2 mt-5 border-top border-4 border-warning">
+        <div class="container text-center">
+            <p class="mb-1"><strong class="text-accent">TRA VINH HERITAGE PROJECT</strong></p>
+            <p class="small text-muted">Hệ thống quản lý và bảo tồn di sản văn hóa tỉnh Trà Vinh &copy; 2026.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

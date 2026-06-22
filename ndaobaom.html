@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://ta-img.tatinta.com/resize/1024/webp/destination/file-1731938173316.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+    <a class="nav-link text-white" href="vatthe.html">
+        <i class="fa-solid fa-gopuram me-1"></i> Di Sản Vật Thể
+    </a>
+</li>
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+    <!-- Khối nội dung chính (Main Content) -->
+    <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 style="color: #003366; font-size: 24px; border-bottom: 2px solid #003366; padding-bottom: 10px; text-transform: uppercase;">
+           Ao Bà Om “viên ngọc xanh” giữa lòng đất Khmer, nơi lưu dấu hồn thiêng văn hóa Nam Bộ
+        </h1>
+
+        <!-- Đoạn mở đầu -->
+        
+
+        <!-- Khối hiển thị hình ảnh di sản -->
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107260823_356777fd4f4e5a1ca60c370ce35d2369.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Nơi đây còn được công nhận là di tích danh lam thắng cảnh cấp quốc gia, gắn liền với đời sống tâm linh và lịch sử đặc sắc của cộng đồng người Khmer tại Trà Vinh.
+            </figcaption>
+        </figure>
+
+        <!-- Các đoạn nội dung chi tiết -->
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Chùa Hang không chỉ là một công trình kiến trúc độc đáo mà còn chứa đựng nhiều câu chuyện lịch sử và huyền thoại. Theo truyền thuyết, ngôi chùa này từng là nơi cư trú của các bậc thầy tu hành nổi tiếng.
+        </p>
+
+        <!-- hiển thị hình ảnh di sản -->
+         
+        <!-- các đoạn nội dung chi tiết -->
+         
+            
+        </p>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677118307887_88ab5d3bdf0745fbe08b17112defec97.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Nhìn từ trên cao, Ao Bà Om nổi bật với hình dáng vuông vức đặc biệt, mặt nước trong xanh phẳng lặng được ôm trọn bởi những hàng cây cổ thụ hàng trăm năm tuổi
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677117987879_5d93ec9a58df88195090dbbb85a71bd9_0.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Lối mòn quanh ao uốn lượn giữa rừng già, phản chiếu bóng cây trên mặt nước, gợi nên cảm giác thanh bình như tranh thủy mặc
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677114358485_d3797e3c80e781df5398a8c55633708a.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Dưới tán rừng già ấy, không gian như trầm mặc lại, khiến du khách có cảm giác như lạc vào một miền cổ tích bị lãng quên nơi quá khứ và hiện tại giao hòa trong từng bước chân.
+            </figcaption>
+        </figure>
+        
+        
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677117042936_9db03bfbac6e01ca942698bb18bfe3b5.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Những hàng sao, hàng dầu cổ thụ rễ trồi lên mặt đất, uốn lượn như những dòng chảy thời gian hóa đá
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107300217_6864ca30a325be8c5fef581f37424ee2.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            
+            
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Mảng xanh của tán lá đan xen với bóng nước tạo nên một bức tranh hữu tình vừa hùng vĩ vừa yên bình, như chốn trú ngụ của ký ức.
+            </figcaption>
+        </figure>
+        
+       
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107152276_e7df9404ca2442abeb17378063112fa4.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Theo truyền thuyết dân gian, Ao Bà Om vốn có tên gốc trong tiếng Khmer là “Srah Ba Om” – trong đó “Srah” nghĩa là ao, “Ba Om” là tên một người phụ nữ Khmer
+            </figcaption>
+        </figure>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107354232_5552ac8e0d545da624361554af6f6fab.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Đây không chỉ là nơi người dân địa phương đến thư giãn, mà còn là điểm đến thiêng liêng gắn liền với đời sống tâm linh của người Khmer qua bao thế hệ.
+            </figcaption>
+        </figure>
+
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107368550_359eb84e3ac6960a34131f9b693dcd33.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Ao Bà Om là nơi diễn ra nhiều lễ hội truyền thống quan trọng của người Khmer, đặc biệt là lễ Ok Om Bok nghi lễ tạ ơn Mặt trăng, cầu mùa màng bội thu. Vào mỗi đêm rằm tháng 10 âm lịch, nơi đây rực rỡ ánh sáng, ngập tràn sắc màu văn hóa
+            </figcaption>
+        </figure>
+
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107346742_9d8559dc6b4b2bbf0fcf93d8e7ea107a.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Câu chuyện kể rằng, để phân định ai sẽ là người đào ao cho dân làng, nam nữ tổ chức cuộc thi đào ao suốt đêm trăng. Nhờ mưu trí, phụ nữ thắng cuộc và cái ao mang tên người đại diện ấy được lưu truyền đến nay như một biểu tượng của trí tuệ, đoàn kết và tinh thần dân tộc.
+            </figcaption>
+        </figure>
+
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107321039_c50be2da0d1cd68b431d98d6a0f35492.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Từ rước đèn, múa mặt nạ, trình diễn nghệ thuật dân gian đến nghi thức giã cốm dẹp – tất cả đều thể hiện rõ bản sắc văn hóa Khmer, tinh thần gắn kết cộng đồng và lòng tri ân trời đất.
+            </figcaption>
+        </figure>
+
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107302334_2f350cca0e7bc22a5346584143f59cfc.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+             Ao Bà Om không chỉ là danh thắng nổi tiếng, mà còn là một “bản di sản sống” – nơi lưu giữ giá trị văn hóa, tín ngưỡng, sinh hoạt cộng đồng của người Khmer qua nhiều thế hệ.
+            </figcaption>
+        </figure>
+
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://media.vov.vn/sites/default/files/styles/large_watermark/public/2025-06/z6677107234299_2bc49ca9d222a374c87842093194594f.jpeg.jpg" alt="Toàn cảnh Chùa Âng nhìn từ trên cao" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+              Việc bảo tồn Ao Bà Om không chỉ là giữ lấy một điểm du lịch, mà còn là giữ lấy cội nguồn tinh thần, là gìn giữ trái tim của văn hóa Khmer giữa lòng Nam Bộ. Nơi đây, hồn dân tộc vẫn vang vọng qua từng mùa trăng hội, qua từng bước chân du khách ghé về.
+            </figcaption>
+        </figure>
+    </main>
+</body>

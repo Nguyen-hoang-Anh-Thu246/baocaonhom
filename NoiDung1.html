@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <!-- Cho phép trang hiển thị đúng trên mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Vinh Heritage - Di Sản Văn Hóa Trà Vinh</title>
+
+    <!-- ============================
+         THƯ VIỆN NGOÀI (CDN)
+    ============================= -->
+    <!-- Bootstrap 5: Framework CSS/JS giúp layout responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome: Thư viện icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts: Font chữ đẹp cho tiêu đề và nội dung -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+            BIẾN CSS TOÀN CỤC (CSS Variables)
+            Dùng var(--tên-biến) ở bất kỳ đâu
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm - dùng cho header */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm - dùng cho navbar */
+            --accent-color: #d4af37;    /* Màu vàng gold - dùng cho điểm nhấn */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt - nền trang */
+        }
+
+        /* Reset font và cài đặt nền vân gỗ bao bọc 2 bên theo image_78a485.jpg */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1920&auto=format&fit=crop'); /* Vân gỗ dọc hai bên rìa */
+            background-attachment: fixed;
+            background-size: cover; /* Chuyển từ contain sang cover để nền gỗ trải đều, không bị lặp lỗi mảnh nhỏ bếp */
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+        }
+
+        /* Font serif cho tiêu đề và logo navbar */
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        /* ============================
+            UTILITY CLASS TÙY CHỈNH
+        ============================= */
+        .bg-custom-header { background-color: var(--primary-color); }  /* Nền đỏ header */
+        .bg-custom-nav { background-color: var(--secondary-color); }    /* Nền xanh navbar */
+        .text-accent { color: var(--accent-color); }                    /* Chữ vàng gold */
+
+        /* ==========================================================================
+            BỔ SUNG CSS PHONG CÁCH BODY CỔ ĐIỂN THEO MẪU IMAGE_78A485.JPG
+            ========================================================================== */
+        
+        /* Khung chứa nội dung chính cố định ở giữa lòng vân gỗ */
+        .main-wrapper {
+            background-color: #fffdec !important; /* Đảm bảo giữ màu giấy bản / kem nhạt */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Tạo hiệu ứng nổi khối rõ ràng */
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-radius: 8px; /* Bo góc nhẹ cho khung nội dung trông mềm mại hơn */
+            margin-left: auto !important;  /* Ép buộc căn giữa tuyệt đối trên mọi màn hình */
+            margin-right: auto !important; /* Ép buộc căn giữa tuyệt đối trên mọi màn hình */
+            padding: 35px !important; /* Thêm khoảng trống đệm đều các phía bên trong bài viết */
+        }
+
+        /* Thanh điều hướng dạng tab xám (Breadcrumbs) trên đầu body */
+        .custom-nav-tabs {
+            background: #e9e5d9;
+            border-bottom: 2px solid #8c5a3c;
+        }
+        .custom-nav-tabs .nav-link {
+            color: #444;
+            font-weight: 500;
+            border-radius: 0;
+            border: none;
+            position: relative;
+            padding: 8px 20px;
+        }
+        .custom-nav-tabs .nav-link.active {
+            background-color: #8c5a3c !important;
+            color: #fff !important;
+        }
+
+        /* Các hộp nội dung di sản (Heritage Card cổ điển) */
+        .heritage-box {
+            background-color: #faf7ee;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Hoa văn giấy chìm nghệ thuật */
+            border: 1px solid #d4c8b0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Thanh tiêu đề khối màu nâu đất nguyên bản ảnh mẫu */
+        .heritage-box-header {
+            background: linear-gradient(to bottom, #bd8352, #8c5a3c); 
+            color: #fff;
+            padding: 10px 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .heritage-box-body {
+            padding: 15px;
+        }
+
+        .heritage-box-body h5 a {
+            color: #1b4d3e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .heritage-box-body h5 a:hover {
+            color: #8c5a3c;
+        }
+
+        .meta-info {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        /* Danh sách gạch đầu dòng có ngôi sao màu cam/vàng giống ảnh mẫu */
+        .star-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .star-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .star-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #f39c12; /* Ngôi sao vàng cam */
+            font-size: 0.8rem;
+        }
+
+        /* Khung ảnh tư liệu cổ xưa ngả màu hoài niệm */
+        .ancient-img-box img {
+            border: 4px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            filter: sepia(10%); /* Giảm nhẹ độ ngả vàng để ảnh sắc nét giống mẫu image_af6859.jpg */
+        }
+
+        /* Tối ưu hóa căn đều văn bản 2 bên */
+        .text-justify {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================
+         1. HEADER (Thanh tiêu đề trên cùng)
+    ============================= -->
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo bên trái -->
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <!-- Thanh tìm kiếm + badge ngôn ngữ bên phải -->
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================
+         2. NAVBAR (Thanh điều hướng)
+    ============================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="phivatthe.html">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- ==========================================================================
+     PHẦN NỘI DUNG CHI TIẾT BÀI VIẾT (BÁM SÁT IMAGE_AF6859.JPG)
+     ========================================================================== -->
+<div class="container main-wrapper my-4 p-4 bg-white shadow-sm" style="max-width: 1000px; background-color: #fffdec !important;">
+    
+    <!-- 1. Thanh điều hướng nhỏ (Breadcrumb) + Ngày giờ đăng bài -->
+    <div class="d-flex justify-content-between align-items-center small text-muted border-bottom pb-2 mb-4">
+        <div>
+            <a href="#" class="text-decoration-none text-muted">Tin tức và sự kiện</a>
+            <i class="fa-solid fa-angle-right mx-1" style="font-size: 0.7rem;"></i>
+        </div>
+        <div>
+           <span>Di sản văn hóa phi vật thể quốc gia vào ngày 24/04/2013</span>
+        </div>
+    </div>
+
+    <!-- 2. Tiêu đề lớn của bài viết (Dùng font Philosophy đồng bộ dự án) -->
+    <h1 class="mb-4 text-dark" style="font-family: 'Philosophy', serif; font-size: 2rem; line-height: 1.3; font-weight: bold;">
+        Nghệ thuật Chầm riêng chà pây của đồng bào Khmer
+    </h1>
+
+    <!-- 3. Đoạn Sa-pô (Tóm tắt đầu bài - In đậm) -->
+    <p class="fw-bold text-justify mb-4" style="font-size: 1.05rem; line-height: 1.6; color: #222;">
+      Nghệ thuật Chầm riêng chà pây là "món ăn tinh thần" vô giá, gắn liền với đời sống lao động và tâm linh của đồng bào Khmer Nam Bộ từ bao đời nay. Được các vị Acha khẳng định có lịch sử lâu đời hơn cả kịch Dù-kê hay múa Rô-băm, loại hình đờn ca độc diễn này là sự kết hợp đỉnh cao giữa tiếng đàn Chà pây trầm ấm và tài năng ứng tác thơ ca tại chỗ của người nghệ sĩ. Hiện nay, tỉnh Trà Vinh đang là cái nôi gìn giữ vẹn nguyên nhất kho tàng di sản độc đáo này trước dòng chảy của thời gian.
+    </p>
+
+    <!-- 4. Hình ảnh tư liệu trung tâm (Ancient-style border) -->
+    <div class="text-center my-4 ancient-img-box">
+        <!-- Thay src bằng link ảnh thực tế của nhóm bạn hoặc giữ nguyên link ảnh mẫu -->
+        <img src="nghe_thuat_cham_ring_cha_pay_khmer_nam_bo_3.avif" 
+             alt="Nghệ thuật Chầm riêng chà pây" 
+             class="img-fluid w-100 shadow-sm" 
+             style="max-width: 750px; border: 4px solid #fff;">
+        
+        <!-- Chú thích ảnh (In nghiêng, màu xám) -->
+        <p class="text-muted fst-italic small mt-2 px-3" style="line-height: 1.4;">
+           Chầm Riêng Chà Pây có lịch sử hàng trăm năm, là một phần trong bữa tiệc tinh thần không thể thiếu sau những ngày nương áng ruộng đồng vất vả của cộng đồng người Khmer Nam Bộ.
+        </p>
+    </div>
+
+    <!-- 5. Nội dung chi tiết bài viết -->
+    <div class="article-content text-justify" style="font-size: 1rem; line-height: 1.6; color: #333;">
+        <p class="mb-3">
+            <b>Bản chất tên gọi và Cội nguồn lịch sử lâu đời</b>
+            <ul>
+                <li>
+                    <p>Ý nghĩa cốt lõi: Tên gọi của loại hình này phản ánh trọn vẹn hình thức biểu diễn: "Chầm riêng" có nghĩa là ca hát, còn "Chà pây" là tên một loại đàn gảy truyền thống. Chầm riêng chà pây đơn giản là nghệ thuật phối hợp hài hòa giữa việc gảy đàn và hát.</p>
+                </li>
+                <li>
+                    <p>Nguồn gốc từ nương rẫy: Dù không có sử sách ghi lại chính xác năm ra đời, nhưng theo lời các vị Acha (những người cao tuổi uy tín trong cộng đồng), nghệ thuật này đã xuất hiện từ rất lâu trước các bộ môn như múa Rô-băm, hát kịch Dù-kê hay hát đối đáp À-day. Nó bắt nguồn từ nhu cầu giải trí bình dị của người lao động sau những giờ làm lụng vất vả trên ruộng đồng.</p>
+                </li>
+            </ul>
+            <b>Nghệ thuật độc diễn, Thể thơ và Hệ thống điệu thức đặc trưng</b>
+            <ul>
+                <li>
+                    <p>Tài năng ứng tác và ngẫu hứng: Điểm đặc sắc nhất là tính độc diễn mang đậm dấu ấn cá nhân. Nghệ nhân không chỉ diễn những bài soạn sẵn mà chủ yếu ngẫu hứng nhanh tại chỗ. Họ tự gảy một đoạn nhạc dạo, hát một đoạn thơ ứng tác rồi lại đệm một câu đàn. Cứ thế, một tích truyện dài có thể được kể xuyên suốt đêm.</p>
+                </li>
+                <li>
+                    <p>Cấu trúc lời ca: Người diễn thường dựa vào các cốt truyện dân gian hoặc các khổ thơ tự sự về cuộc đời để ứng tác thành các đoạn thơ — phổ biến nhất là thể thơ 4 câu, mỗi câu 7 chữ. Sự độc đáo nằm ở giọng điệu, cách luyến láy và khúc nhạc kết riêng biệt của từng người.</p>
+                </li>
+                <li>
+                    <p>Sự phong phú của điệu thức: Bộ môn này sở hữu một hệ thống điệu thức bài bản và đa dạng bao gồm: phát chây, phát chây cớt, som phôn, som phôn cớt, ang kô reach chơn prây srây, và ang kô reach chơn prây rốs.</p>
+                </li>
+            </ul>
+            <b>Trà Vinh – Nơi gìn giữ vẹn nguyên di sản và Hướng đi tương lai</b>
+            <ul>
+                <li>
+                    <p>Cái nôi lưu giữ: Trong số các địa phương có đồng bào Khmer sinh sống tại Nam Bộ, người Khmer tại Trà Vinh hiện nay là những người kế thừa đầy đủ và nguyên vẹn nhất loại hình nghệ thuật này. Trà Vinh sở hữu một kho tàng nhạc khí dân tộc vô cùng phong phú, tiêu biểu cho cả vùng Đồng bằng sông Cửu Long.</p>
+                </li>
+                <li>
+                    <p>Chiến lược bảo tồn: Nhận thức được giá trị văn hóa tinh thần không thể thay thế, tỉnh Trà Vinh cùng đồng bào các tỉnh Nam Bộ đã và đang xây dựng các kế hoạch, chiến lược cụ thể nhằm gìn giữ, truyền dạy và phát triển bền vững di sản văn hóa quan trọng này.</p>
+                </li>
+            </ul>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

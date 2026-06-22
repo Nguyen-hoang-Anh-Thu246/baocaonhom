@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://mia.vn/media/uploads/blog-du-lich/chua-phuoc-minh-cung-kien-truc-dac-trung-1743381564.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+    <a class="nav-link text-white" href="vatthe.html">
+        <i class="fa-solid fa-gopuram me-1"></i> Di Sản Vật Thể
+    </a>
+</li>
+
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+    <!-- Khối nội dung chính (Main Content) -->
+    <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 style="color: #003366; font-size: 24px; border-bottom: 2px solid #003366; padding-bottom: 10px; text-transform: uppercase;">
+         Chùa Ông – Phước Minh Cung ở Trà Vinh
+        </h1>
+
+        <!-- Đoạn mở đầu -->
+        <p style="margin-top: 15px; text-align: justify;">
+          Phước Minh Cung tọa lạc tại số 44 đường Điện Biên Phủ, Phường 2, thành phố Trà Vinh, được xem là một công trình kiến trúc độc đáo tiêu biểu và là một “ bảo tàng mỹ thuật truyền thống” của cộng đồng người Hoa trên địa bàn Trà Vinh. Phước Minh Cung đã được xếp hạng di tích lịch sử – văn hóa cấp quốc gia vào năm 2005.
+        </p>
+
+        <!-- Khối hiển thị hình ảnh di sản -->
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung4.jpg" alt="oàn cảnh Phước Minh Cung" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Toàn cảnh Phước Minh Cung
+            </figcaption>
+        </figure>
+
+        <!-- Các đoạn nội dung chi tiết -->
+        <p style="margin-bottom: 15px; text-align: justify;">
+            Phước Minh Cung thường được gọi là Chùa Ông vì vị thần chính được tôn thờ là Quan Thánh đế, tức Quan Công một nhân vật thời Tam Quốc, nổi tiếng là công minh chính trực và trí dũng song toàn.
+        </p>
+
+        <!-- hiển thị hình ảnh di sản -->
+         <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung.jpg" alt="Phước Minh Cung đã được xếp hạng di tích lịch sử – văn hóa cấp quốc gia vào năm 2005." style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Phước Minh Cung đã được xếp hạng di tích lịch sử – văn hóa cấp quốc gia vào năm 2005.
+            </figcaption>
+        </figure>
+        <!-- các đoạn nội dung chi tiết -->
+         <p style="margin-bottom: 15px; text-align: justify;">
+            <li>
+             Phước Minh Cung theo bi ký đá và gỗ còn lưu giữ được xác định xây dựng từ năm 1556. Trải qua thời gian dài, ngôi chùa không còn tư liệu lịch sử ghi chép gốc và đã trải qua nhiều lần trùng tu, gần đây nhất là năm 1991 và năm 2000.
+            </li>
+            <li>
+                Không gian kiến trúc của ngôi chùa theo kiểu “ nội công ngoại quốc” truyền thống Trung Hoa. Với ba ngôi tiền điện, trung điện, chính điện theo hình chữ “Tam” và hai dãy tả điện, hữu điện hướng vào.
+            </li>
+            <li>
+                Kiến trúc Phước Minh Cung nổi bật với mái ngói âm dương nhiều tầng bậc, diềm mái tráng men xanh ngọc và hệ thống cột kèo bằng gỗ quý. Nội thất từ bàn thờ, cửa võng đến hoành phi, liễn đối đều được chạm khắc tinh xảo theo mỹ thuật Trung Hoa truyền thống, thể hiện qua các điển tích và biểu tượng như lưỡng long chầu nguyệt, tứ linh, bát tiên.
+            </li>
+            <li>
+                Toàn bộ khung sườn chịu lực bằng những thân cột tròn và vuông to lớn, vững chắc. Từ ngoài vào trong, rường cột nào cũng được chạm trổ tinh tế bằng các họa tiết long, lân, hoa, lá. Trên các trụ rào, cổng rào cũng nổi bật nhiều tượng sư tử.
+            </li>
+        </p>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuavamray-4.jpg" alt="Hình tượng Chằn Yeak" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+                Hình tượng Chằn Yeak
+            </figcaption>
+        </figure>
+        <li>
+           Lối vào chùa Vàm Ray là chiếc cổng hoành tráng sơn màu mạ vàng, đỉnh cổng tạo hình những ngọn tháp nhọn chất chồng nhiều tầng, ẩn mình không gian cây xanh bao quanh khiến cổng chùa càng nổi bật.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung3.jpg" alt="Không gian kiến trúc theo truyền thống Trung Hoa" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Không gian kiến trúc theo truyền thống Trung Hoa
+            </figcaption>
+        </figure>
+        
+       
+        <li>
+           Tiền điện Phước Minh Cung đặc sắc với lối kiến trúc "Ngũ môn kín" bao gồm 3 lối đi chính và 2 cửa phụ. Cửa gỗ được trang trí môn thần Tần Thúc Bảo, Uất Trì Cung, kết hợp phù điêu Thanh long, Bạch hổ hai bên vách. Kiến trúc nổi bật với biển đại tự, phù điêu điển tích cổ và bao lam Lưỡng phụng tranh châu. Hệ thống rường cột được chạm trổ họa tiết Long, Lân, hoa lá và tiểu tượng bát tiên sắc sảo.
+        </li>
+        
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung01.jpg" alt="Tiền điện" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+             Tiền điện
+            </figcaption>
+        </figure>
+        <li>
+           Hết tiền điện du khách vào trung điện. Trung điện cũng được trang trí rất hài hòa mỹ thuật với các hoành phi, phù điêu, liễn đối. Nổi bật nhất là đồ án Bát tiên kỵ thú, gồm: Lý Thiết Quài cưỡi tượng cầm bầu trói, Lam Thái Hòa cưỡi phụng cầm giỏ hoa, Tào Quốc Cựu cưỡi hươu cầm ngọc quyển, Hà Tiên Cô cưỡi phụng cầm đóa sen, Hàn Tương Tư cưỡi công thổi sáo, Hán Chung Ly cưỡi sư tử cầm quạt, Lã Đồng Tân cưỡi hạc cầm phất trần, Trưởng Quả Lão cười lừa cầm sên. Đồ án thể hiện tám chặng đường tu tập bí pháp để thành tiên của đạo và cũng biểu trưng cho sự trường sinh bất tử.
+        </li>
+        <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/chuaongtravinh.jpg" alt="Trung điện" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Trung điện
+            </figcaption>
+        
+        
+       
+       <li>
+        Lộng lẫy nhất là chính điện gồm 3 gian thờ, nơi nào cũng được bài trí tôn nghiêm. Gian giữa thờ Quan thánh Đế quân với bức hoành phi bằng đại tự “Kiền khôn chính khí” thếp vàng. Bên phải thờ Chúa sanh nương nương, khánh thờ chạm “Lưỡng long tranh châu” và “Long vân hoa điểu”. Bên trái thờ Phước Đức chánh thần, cũng trang trí thật tinh xảo.
+       </li>
+       
+       <figure style="margin: 25px 0; padding: 0; background-color: #ffffff; width: 100%;">
+    <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung2.jpg" 
+         alt="Bên trong chánh điện" 
+         style="width: 100%; height: auto; display: block; border: none; box-shadow: none;">
+    <figcaption style="font-family: Arial, sans-serif; font-size: 14px; color: #555555; text-align: center; padding: 12px 15px 0 15px; background-color: #ffffff;">
+       Bên trong chánh điện
+        
+        <div style="width: 60px; height: 2px; background-color: #666666; margin: 8px auto 0 auto;"></div>
+    </figcaption>
+</figure>
+    <li>
+        Tại ngôi chính điện còn được bố trí ba dãy bàn thờ, lúc nào cũng nghi ngút khói hương và đồ cúng bày biện thật tươm tất gồm bánh mứt, trái cây do khách hành hương mang đến hỉ cúng.
+    </li>
+    <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung8.jpg" alt="Công trình kiến trúc đậm chất văn hóa Khmer" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Quan thánh Đế quân
+            </figcaption>
+    </figure>
+            <li>
+                Đáng chú ý là có tượng xích thố – con ngựa quý của Quan Công bằng mây cũng là công trình nghệ thuật hiếm thấy.
+            </li>
+            <figure style="margin: 25px 0; text-align: center;">
+            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/10/phuocminhcung03.jpg" alt="CTượng xích thố – con ngựa quý của Quan Công" style="width: 100%; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <figcaption style="font-style: italic; font-size: 14px; color: #555; margin-top: 8px; background-color: #f5f5f5; padding: 8px; border-radius: 4px;">
+               Tượng xích thố – con ngựa quý của Quan Công
+            </figcaption>
+    </figure>
+    <li>
+        Ngoài ra, phía sau chùa (cổng sau) còn bố trí một hoa viên gồm cây cảnh, non bộ, tiểu cảnh trong thật uy nghiêm và tráng lệ.
+
+Có thể nói Phước Minh Cung là một công trình kiến trúc có giá trị nghệ thuật cao còn lưu lại ở Trà Vinh. Đó là những nét đẹp văn hóa truyền thống của cộng đồng người Hoa ở đồng bằng sông Cửu Long, rất xứng đáng cho khách du lịch Trà Vinh đến chiêm ngưỡng.
+    </li>
+    </main>
+</body>

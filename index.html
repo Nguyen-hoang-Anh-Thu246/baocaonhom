@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <!-- Cho phép trang hiển thị đúng trên mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Vinh Heritage - Di Sản Văn Hóa Trà Vinh</title>
+
+    <!-- ============================
+         THƯ VIỆN NGOÀI (CDN)
+    ============================= -->
+    <!-- Bootstrap 5: Framework CSS/JS giúp layout responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome: Thư viện icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts: Font chữ đẹp cho tiêu đề và nội dung -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (CSS Variables)
+           Dùng var(--tên-biến) ở bất kỳ đâu
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm - dùng cho header */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm - dùng cho navbar */
+            --accent-color: #d4af37;    /* Màu vàng gold - dùng cho điểm nhấn */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt - nền trang */
+        }
+
+        /* Reset font và màu nền toàn trang */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        /* Font serif cho tiêu đề và logo navbar */
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        /* ============================
+           UTILITY CLASS TÙY CHỈNH
+        ============================= */
+        .bg-custom-header { background-color: var(--primary-color); }  /* Nền đỏ header */
+        .bg-custom-nav { background-color: var(--secondary-color); }    /* Nền xanh navbar */
+        .text-accent { color: var(--accent-color); }                    /* Chữ vàng gold */
+
+        /* Nút vàng gold tùy chỉnh */
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+        .btn-accent:hover {
+            background-color: #bfa030;
+            color: #000;
+        }
+
+        /* ============================
+           HERO SLIDER (CAROUSEL)
+           Ảnh nền chiếm toàn màn hình ngang
+        ============================= */
+        .carousel-item {
+            height: 500px;          /* Chiều cao slider */
+            background-size: cover; /* Ảnh nền phủ kín */
+            background-position: center;
+        }
+        /* Khung chữ bên trong slider - nền tối mờ */
+        .carousel-caption-custom {
+            background: rgba(0, 0, 0, 0.6); /* Nền đen mờ 60% */
+            padding: 20px;
+            border-radius: 8px;
+            border-bottom: 6px solid var(--accent-color); /* Viền vàng bên dưới */
+        }
+
+        /* ============================
+           HỘP VĂN HÓA DÂN TỘC
+           Hiệu ứng nổi lên khi hover
+        ============================= */
+        .culture-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s; /* Hiệu ứng chuyển động mượt */
+            text-align: center;
+            cursor: pointer;
+        }
+        .culture-box:hover {
+            transform: translateY(-5px);            /* Nổi lên 5px khi hover */
+            border: 1px solid var(--accent-color);  /* Viền vàng khi hover */
+        }
+        .culture-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+           Hiệu ứng phóng to khi hover
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden; /* Cắt ảnh theo bo góc */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s;
+        }
+        .heritage-card:hover {
+            transform: scale(1.03);                         /* Phóng to nhẹ khi hover */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 200px;
+            object-fit: cover; /* Ảnh không bị méo dù khác tỉ lệ */
+        }
+
+        /* ============================
+           BẢN ĐỒ GIẢ LẬP
+           Khung chờ nhúng Leaflet/Google Maps
+        ============================= */
+        .map-placeholder {
+            height: 400px;
+            background: #e5e3df;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--secondary-color); /* Viền nét đứt */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================
+         1. HEADER (Thanh tiêu đề trên cùng)
+         Chứa logo + thanh tìm kiếm + ngôn ngữ
+    ============================= -->
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <!-- .container: Giới hạn chiều rộng nội dung, căn giữa trang -->
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <!-- Logo bên trái -->
+            <div class="d-flex align-items-center">
+                <!-- fa-gopuram: Icon tháp chùa từ Font Awesome -->
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">Di Sản Trà Vinh</span>
+            </div>
+
+            <!-- Thanh tìm kiếm + badge ngôn ngữ bên phải -->
+            <div class="d-flex align-items-center gap-3">
+                <!-- d-none d-md-flex: Ẩn trên mobile, hiện từ màn hình md trở lên -->
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <!-- Badge ngôn ngữ VI/EN -->
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================
+         2. NAVBAR (Thanh điều hướng)
+         sticky-top: Dính trên cùng khi cuộn trang
+         navbar-expand-lg: Mở rộng menu từ màn hình lg
+    ============================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <!-- Nút hamburger hiện trên mobile khi menu bị thu gọn -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Danh sách menu - ẩn/hiện theo nút hamburger trên mobile -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item"> 
+                        <a class="nav-link active text-accent" href="#">
+                            <i class="fa-solid fa-house me-1" href="index.html"></i> Trang chủ
+                        </a>
+                    </li>
+
+                    <!-- Dropdown menu: Khám phá di sản -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
+                            Khám phá di sản
+                        </a>
+                        <!-- Danh sách thả xuống -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
+                            <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
+                            <li><a class="dropdown-item" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                            <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================
+         3. HERO CAROUSEL (Slider ảnh lớn)
+         data-bs-ride="carousel": Tự động chạy
+         3 slide tương ứng 3 chủ đề di sản
+    ============================= -->
+    <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Chấm chỉ thị slide đang hiển thị -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <!-- Slide 1: Chủ đề giao thoa văn hóa -->
+            <div class="carousel-item active" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://egoldship.vn/vnt_upload/news/tra_vinh_12_15_38_13_300.jpg')">
+                <!-- d-none d-md-block: Ẩn caption trên mobile -->
+                <div class="carousel-caption d-none d-md-block text-start start-5">
+                    <div class="carousel-caption-custom">
+                        <h2 class="text-accent">TRÀ VINH: NƠI GIAO THOA VĂN HÓA KINH - KHMER - HOA</h2>
+                        <p>Khám phá vùng đất huyền thoại của những ngôi chùa cổ kính và những lễ hội ngàn năm.</p>
+                        <button class="btn btn-accent text-uppercase">Bắt đầu hành trình</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Lễ hội Ok Om Bok -->
+            <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://skydoor.net/Download?mode=entry&size=640&id=4208')">
+                <div class="carousel-caption d-none d-md-block text-start start-5">
+                    <div class="carousel-caption-custom">
+                        <h2 class="text-accent">LỄ HỘI OK OM BOK HÙNG VĨ</h2>
+                        <p>Trải nghiệm không khí đua ghe Ngo rực lửa và đêm hội thả đèn gió lung linh bên dòng sông.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Danh thắng Ao Bà Om -->
+            <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://thamhiemmekong.com/wp-content/uploads/2020/06/aobaom-02.jpg')">
+                <div class="carousel-caption d-none d-md-block text-start start-5">
+                    <div class="carousel-caption-custom">
+                        <h2 class="text-accent">DANH THẮNG AO BÀ OM</h2>
+                        <p>Lạc bước giữa những gốc rễ cổ thụ hàng trăm năm tuổi bao bọc mặt hồ thanh tịnh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút điều hướng trái/phải -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- ============================
+         4. TỔNG QUAN VĂN HÓA
+         Layout 2 cột: tiêu đề trái, 3 hộp văn hóa phải
+         .container: Căn giữa và giới hạn chiều rộng
+         .row + .col-*: Hệ thống lưới Bootstrap 12 cột
+    ============================= -->
+    <section class="container my-5">
+        <div class="row align-items-center g-4">
+
+            <!-- Cột trái: Tiêu đề và mô tả (chiếm 4/12 cột trên lg) -->
+            <div class="col-lg-4">
+                <h2 class="border-bottom border-danger pb-2 text-uppercase">Tổng quan Văn Hóa</h2>
+                <p class="text-muted">Trà Vinh tự hào sở hữu bảo tàng sống động về sự gắn kết, chung sống hòa bình lâu đời của ba cộng đồng dân tộc đồng cốt, cấu thành nên một kho tàng di sản độc nhất vô nhị miền Tây Nam Bộ.</p>
+            </div>
+
+            <!-- Cột phải: 3 hộp văn hóa (chiếm 8/12 cột trên lg) -->
+            <div class="col-lg-8">
+                <!-- g-3: Khoảng cách giữa các cột con -->
+                <div class="row g-3">
+
+                    <!-- Hộp 1: Văn hóa Kinh -->
+                    <div class="col-sm-4">
+                        <div class="culture-box">
+                            <div class="culture-icon"><i class="fa-solid fa-user-tie"></i></div>
+                            <h5>Văn Hóa Kinh</h5>
+                            <small class="text-muted">Đờn ca tài tử, đình làng, đền thờ mang tính chất truyền thống lúa nước Việt Nam.</small>
+                        </div>
+                    </div>
+
+                    <!-- Hộp 2: Văn hóa Khmer -->
+                    <div class="col-sm-4">
+                        <div class="culture-box">
+                            <div class="culture-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                            <h5>Văn Hóa Khmer</h5>
+                            <small class="text-muted">Hệ thống chùa Tháp nguy nga, múa Rô-băm, hát Dù-kê và lễ hội tôn giáo Angkor.</small>
+                        </div>
+                    </div>
+
+                    <!-- Hộp 3: Văn hóa Hoa -->
+                    <div class="col-sm-4">
+                        <div class="culture-box">
+                            <!-- fa-yin-yang: Icon âm dương đúng tên -->
+                            <div class="culture-icon"><i class="fa-solid fa-yin-yang"></i></div>
+                            <h5>Văn Hóa Hoa</h5>
+                            <small class="text-muted">Các hội quán, Thất Phủ Miếu cổ xưa, kiến trúc chạm khắc tinh xảo cùng lễ hội Vu Lan.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         5. DI SẢN NỔI BẬT & BẢN ĐỒ
+         Layout 2 cột lớn:
+         - Trái (7/12): Lưới 4 thẻ di sản
+         - Phải (5/12): Bộ lọc + bản đồ
+    ============================= -->
+    <section class="container my-5">
+        <div class="row g-5">
+
+            <!-- === CỘT TRÁI: Thẻ di sản === -->
+            <div class="col-lg-7">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="text-uppercase mb-0">
+                        <i class="fa-solid fa-bookmark text-danger me-2"></i>Di sản nổi bật
+                    </h2>
+                    <button class="btn btn-outline-secondary btn-sm">
+                        Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Lưới 2x2 thẻ di sản -->
+                <div class="row g-3">
+
+                    <!-- Thẻ 1: Chùa Hang -->
+                    <div class="col-sm-6">
+                        <div class="card heritage-card">
+                            <!-- object-fit: cover trong CSS giữ ảnh không bị méo -->
+                            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuahangtravinh-5.jpg" class="card-img-top" alt="Chùa Hang">
+                            <div class="card-body">
+                                <!-- Badge màu phân loại di sản -->
+                                <span class="badge bg-success mb-2">Vật thể (Chùa Khmer)</span>
+                                <h5 class="card-title">Chùa Hang (Kompong Chray)</h5>
+                                <p class="card-text text-muted small">Ngôi chùa mang vẻ đẹp hoang sơ tự nhiên với cổng hang độc đáo và xưởng khắc gỗ nghệ thuật sầm uất bên trong.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ 2: Nghệ thuật Dù-kê -->
+                    <div class="col-sm-6">
+                        <div class="card heritage-card">
+                            <img src="https://i.pinimg.com/736x/52/c7/05/52c7055029d585b78e8ee66a23e130fd.jpg" class="card-img-top" alt="Nghệ thuật Dù Kê">
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">Phi vật thể (Nghệ thuật)</span>
+                                <h5 class="card-title">Nghệ thuật sân khấu Dù-kê</h5>
+                                <p class="card-text text-muted small">Kịch hát truyền thống của người Khmer Nam Bộ được hình thành và phát triển rực rỡ nhất ngay trên đất Trà Vinh.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ 3: Bánh tét Trà Cuôn -->
+                    <div class="col-sm-6">
+                        <div class="card heritage-card">
+                            <img src="https://mia.vn/media/uploads/blog-du-lich/banh-tet-tra-cuon-01-1706664373.jpeg" class="card-img-top" alt="Bánh tét Trà Cuôn">
+                            <div class="card-body">
+                                <span class="badge bg-info text-dark mb-2">Văn hóa Ẩm thực</span>
+                                <h5 class="card-title">Bánh tét Trà Cuôn</h5>
+                                <p class="card-text text-muted small">Đặc sản gia truyền nổi tiếng đậm vị với hạt nếp dẻo thơm ngấm nước lá ngót bọc trứng muối thơm bùi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ 4: Chùa Âng -->
+                    <div class="col-sm-6">
+                        <div class="card heritage-card">
+                            <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg" class="card-img-top" alt="Chùa Âng">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Vật thể (Chùa Khmer)</span>
+                                <h5 class="card-title">Chùa Âng (Angkorajaborey)</h5>
+                                <p class="card-text text-muted small">Ngôi chùa Khmer cổ nhất Trà Vinh nằm hài hòa bên danh thắng Ao Bà Om, mang đậm phong cách kiến trúc Angkor cổ kính.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- === CỘT PHẢI: Bản đồ & bộ lọc === -->
+            <div class="col-lg-5">
+                <div class="mb-4">
+                    <h2 class="text-uppercase">
+                        <i class="fa-solid fa-map-location-dot text-success me-2"></i>Bản đồ di sản
+                    </h2>
+                </div>
+
+                <!-- Thẻ bộ lọc khu vực -->
+                <div class="card p-3 shadow-sm bg-white border-0 mb-3">
+                    <h6 class="fw-bold mb-3">
+                        <i class="fa-solid fa-filter me-1 text-secondary"></i> Bộ lọc khu vực
+                    </h6>
+                    <div class="row g-2">
+                        <!-- Select 1: Lọc theo huyện/thành phố -->
+                        <div class="col-sm-6">
+                            <select class="form-select form-select-sm">
+                                <option selected>-- Chọn Huyện/Thành phố --</option>
+                                <option>Thành phố Trà Vinh (Mở rộng)</option>
+                                <option>Thị xã Duyên Hải</option>
+                                <option>Huyện Cầu Kè</option>
+                                <option>Huyện Tiểu Cần</option>
+                                <option>Huyện Trà Cú</option>
+                                <option>Huyện Châu Thành</option>
+                                <option>Huyện Càng Long</option>
+                                <option>Huyện Cầu Ngang</option>
+                                <option>Huyện Duyên Hải</option>
+                            </select>
+                        </div>
+                        <!-- Select 2: Lọc theo loại hình di sản -->
+                        <div class="col-sm-6">
+                            <select class="form-select form-select-sm">
+                                <option selected>-- Loại hình di sản --</option>
+                                <option>Di sản vật thể</option>
+                                <option>Di sản phi vật thể</option>
+                                <option>Ẩm thực & Làng nghề</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khung giữ chỗ cho bản đồ GIS (Leaflet/Google Maps) -->
+                <div class="map-placeholder">
+                    <div class="text-center">
+                        <i class="fa-solid fa-map-pin text-danger fs-1 mb-2"></i>
+                        <p class="mb-0 fw-medium text-secondary">Hệ thống Bản đồ Số GIS</p>
+                        <small class="text-muted">(Nhúng Leaflet API / Google Maps API tại khối này)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         6. FOOTER
+         border-top border-warning: Viền vàng trên cùng footer
+         3 cột: Giới thiệu | Liên kết | Đơn vị thực hiện
+    ============================= -->
+    <footer class="bg-dark text-white-50 pt-5 pb-3 border-top border-4 border-warning">
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- Cột 1: Giới thiệu dự án -->
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3 text-accent">
+                        <i class="fa-solid fa-gopuram me-2"></i>TRA VINH HERITAGE
+                    </h5>
+                    <p class="small">Sản phẩm số hóa phục vụ bảo tồn và phát triển văn hóa di sản của vùng đất Tây Nam Bộ Việt Nam.</p>
+                </div>
+
+                <!-- Cột 2: Liên kết nhanh -->
+                
+
+                <!-- Cột 3: Thông tin nhóm - căn phải trên md -->
+                <div class="col-md-4 text-md-end">
+                    <h5 class="text-white mb-3">Đơn vị thực hiện</h5>
+                    <p class="small mb-1">Đồ án Nhóm sinh viên Công nghệ thông tin</p>
+                    <p class="badge bg-custom-nav text-accent">Lớp Học: DA25TTC</p>
+                </div>
+            </div>
+
+            <!-- Đường kẻ ngang phân cách -->
+            <hr class="mt-4 mb-3 border-secondary">
+
+            <!-- Copyright + icon mạng xã hội -->
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small">
+                <span>&copy; 2026 Tra Vinh Heritage Project. All rights reserved.</span>
+                <div class="d-flex gap-3 fs-5 mt-2 mt-sm-0">
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="text-white-50"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (bao gồm Popper.js cho dropdown, carousel) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

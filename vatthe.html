@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di Sản Vật Thể - Tra Vinh Heritage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           BIẾN CSS TOÀN CỤC (Đồng bộ trang chủ)
+        ============================= */
+        :root {
+            --primary-color: #800020;   /* Màu đỏ trầm */
+            --secondary-color: #1b4d3e; /* Màu xanh lá đậm */
+            --accent-color: #d4af37;    /* Màu vàng gold */
+            --bg-light: #fdfaf4;        /* Màu nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        /* ============================
+           BANNER TRANG CON (PAGE BANNER)
+        ============================= */
+        .page-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* ============================
+           THẺ DI SẢN (HERITAGE CARD)
+        ============================= */
+        .heritage-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .heritage-card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Thẻ trống dùng để thêm mới */
+        .heritage-card.card-placeholder {
+            border: 2px dashed #ccc;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+        .heritage-card.card-placeholder:hover {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* Nút viền đỏ tùy chỉnh */
+        .btn-custom {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Thanh phân trang */
+        .page-link {
+            color: var(--primary-color);
+        }
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        /* Đường kẻ phân cách bo tròn trong Card */
+.heritage-divider {
+    border-top: 2px solid var(--primary-color);
+    border-radius: 10px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+/* Định dạng Modal để giống ảnh */
+.modal-info-list {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.modal-info-list li {
+    margin-bottom: 8px;
+    color: #444;
+}
+.btn-link-custom {
+    display: block;
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.btn-link-custom:hover { background: #600018; color: white; }
+    </style>
+</head>
+<body>
+
+     <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 tracking-wide text-accent navbar-brand">DI SẢN TRÀ VINH</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản vật thể...">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <span class="badge bg-light text-dark">
+                    <i class="fa-solid fa-earth-asia me-1"></i> VI / EN
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-lg-4 text-uppercase">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html">
+                        <i class="fa-solid fa-house me-1"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active text-accent" href="#" data-bs-toggle="dropdown">
+                        Khám phá di sản
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" href="vatthe.html">Di sản Vật thể</a></li>
+                        <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
+                        <li><a class="dropdown-item" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                        <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Bản đồ tương tác</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <section class="page-banner text-center">
+        <div class="container">
+            <h1 class="display-4 text-accent text-uppercase">Di Sản Vật Thể</h1>
+            <p class="lead text-white-50 max-w-600 mx-auto">
+            Chiêm ngưỡng những công trình kiến trúc cổ kính, đền đài độc đáo chứng kiến dòng chảy lịch sử giao thoa của vùng đất Trà Vinh.
+        </p>
+        </div>
+    </section>
+
+    <section class="container my-5">
+    <!-- Row duy nhất bao quanh tất cả các card -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        
+        <!-- Card 1: Chùa Âng -->
+        <div class="col">
+            <div class="card heritage-card">
+                <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg" class="card-img-top" alt="Chùa Âng">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Cấp Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">TP. Trà Vinh</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Chùa Âng (Angkorajaborey)</h5>
+                    <p class="card-text text-muted small flex-grow-1">Là ngôi chùa cổ nhất trong hệ thống chùa Khmer tại Trà Vinh với tuổi đời hơn 1000 năm. Kiến trúc mang đậm dấu ấn phong cách Angkor kết hợp hài hòa với cảnh sắc thiên nhiên bên Ao Bà Om.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+                       data-title="Chùa Âng (Angkorajaborey)"
+                       data-img="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg"
+                       data-badge1="Cấp Quốc Gia"
+                       data-badge2="TP. Trà Vinh"
+                       data-arch="Kiến trúc Khmer cổ"
+                       data-faith="Phật giáo Nam tông"
+                       data-details="Di sản văn hóa Nam Bộ.|Điểm du lịch tâm linh nổi tiếng.|Lịch sử hình thành lâu đời."
+                         data-link="noidungchuaang.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+
+        <!-- Card 2: Chùa Hang -->
+        <div class="col">
+            <div class="card heritage-card">
+                <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuahangtravinh-5.jpg" class="card-img-top" alt="Chùa hang">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Cấp Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">H. Châu Thành</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Chùa Hang (KomPong Chray)</h5>
+                    <p class="card-text text-muted small flex-grow-1">Nổi tiếng với chiếc cổng chào được thiết kế giống như một hang động nguyên sơ hướng ra lộ lớn. Nơi đây còn là vườn ươm nghệ thuật điêu khắc gỗ tinh xảo từ rễ cây cổ thụ của các nghệ nhân Khmer.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+                       data-title="Chùa Hang (Kompong Chray)"
+                       data-img="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuahangtravinh-5.jpg"
+                       data-badge1="Cấp Quốc Gia"
+                       data-badge2="H. Châu Thành"
+                       data-arch="Kiến trúc Khmer truyền thống"
+                       data-faith="Phật giáo Nam tông"
+                       data-details="Cổng chùa thiết kế như hang động.|Vườn ươm nghệ thuật điêu khắc gỗ.|Không gian xanh mát bao quanh."
+                        data-link="chuahang.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+        <!-- card 3: Đền Thờ Bác -->
+         <div class="col">
+            <div class="card heritage-card">
+                <img src="https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2025/1/18/a1f622bb92c74a3cb92797b12f707ed3" class="card-img-top" alt="Chùa hang">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Di Tích Lịch Sử Văn Hóa Cấp Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">TP. Trà Vinh</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Đền Thờ Chủ Tịch Hồ Chí Minh</h5>
+                    <p class="card-text text-muted small flex-grow-1">Khu di tích lịch sử Đền thờ Bác Hồ ở xã Long Đức, thành phố Trà Vinh được Bộ Văn hóa Thông tin, nay là Bộ Văn hóa, Thể thao và Du lịch (VH-TT-DL) xếp hạng Di tích lịch sử văn hóa cấp quốc gia vào năm 1989. Theo nhà nghiên cứu Trần Bạch Đằng, nơi đây được xem là “Công trình của trái tim” bởi ý nghĩa thiêng liêng của việc hình thành, quá trình chiến đấu bảo vệ ngoan cường và giá trị tinh thần của ngôi đền trong đời sống tinh thần của Đảng bộ, quân, dân Trà Vinh.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+               data-title="Đền Thờ Chủ Tịch Hồ Chí Minh"
+               data-img="https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2025/1/18/a1f622bb92c74a3cb92797b12f707ed3"
+               data-badge1="Cấp Quốc Gia"
+               data-badge2="TP. Trà Vinh"
+               data-arch="Kiến trúc đền thờ truyền thống"
+               data-faith="Tín ngưỡng thờ cúng lãnh tụ"
+               data-details="Khởi công năm 1970 trong khói lửa chiến tranh.|Được mệnh danh là Công trình của trái tim.|Nổi bật với mô hình Nhà sàn Bác Hồ tỉ lệ 97%."
+               data-link="denthobac.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+        <!-- Card 4: Danh thắng ao bà om -->
+         <div class="col">
+            <div class="card heritage-card">
+                <img src="https://thamhiemmekong.com/wp-content/uploads/2020/06/aobaom-02.jpg" class="card-img-top" alt="AO BÀ OM">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Danh Thắng Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">TP. Trà Vinh</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Danh Thắng Ao Bà Om</h5>
+                    <p class="card-text text-muted small flex-grow-1">Còn gọi là Ao Vuông, hồ nước phẳng lặng được bao bọc bởi những rặng cây sao, cây dầu cổ thụ có bộ rễ khổng lồ trồi lên mặt đất với đủ hình thù kỳ vĩ, huyền bí.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+               data-title="Danh Thắng Ao Bà Om"
+               data-img="https://thamhiemmekong.com/wp-content/uploads/2020/06/aobaom-02.jpg"
+               data-badge1="Danh Thắng Quốc Gia"
+               data-badge2="TP. Trà Vinh"
+               data-arch="Cảnh quan thiên nhiên độc đáo"
+               data-faith="Trung tâm lễ hội truyền thống"
+               data-details="Mặt ao phẳng lặng, rực rỡ sắc sen súng.|Bao bọc bởi rừng cây sao, dầu cổ thụ trăm tuổi.|Gắn liền với truyền thuyết kỳ bí của người Khmer."
+               data-link="ndaobaom.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+        <!-- Card 5: Chùa Vàm Ray -->    
+    <div class="col">
+            <div class="card heritage-card">
+                <img src="https://dulichviet.com.vn/images/bandidau/tham-quan-chua-vam-ray-tra-vinh.jpg" class="card-img-top" alt="AO BÀ OM">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Di Tích Cấp Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">H. Trà Cú</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Chùa Vàm Ray</h5>
+                    <p class="card-text text-muted small flex-grow-1">Chùa Vàm Ray nằm ở ấp Vàm Ray, xã Hàm Tân, huyện Trà Cú, với thời gian tồn tại hơn 600 năm. Để giữ di tích cổ còn sót lại, ông Trầm Bê đã tài trợ phục chế và cải tạo, trong thời gian 3 năm với tổng kinh phí hơn 1 triệu USD.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+               data-title="Chùa Vàm Ray"
+               data-img="https://dulichviet.com.vn/images/bandidau/tham-quan-chua-vam-ray-tra-vinh.jpg"
+               data-badge1="Di Tích Cấp Quốc Gia"
+               data-badge2="H. Trà Cú"
+               data-arch="Cảnh quan thiên nhiên độc đáo"
+               data-faith="Trung tâm lễ hội truyền thống"
+               data-details="Ngôi chùa Khmer lớn nhất Việt Nam với lịch sử hơn 600 năm.|Sở hữu tượng Phật Thích Ca nhập Niết Bàn ngoài trời dài 54m.|Nổi bật với chiếc cổng và cột trụ thần rắn Naga 5 đầu độc đáo."
+               data-link="ndchuavamray.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+        <!-- Card 6: Phước Minh Cung -->
+         <div class="col">
+            <div class="card heritage-card">
+                <img src="https://luhanhvietnam.com.vn/du-lich/vnt_upload/news/03_2024/phuoc_minh_cung_tra_vinh_thamhiemmekong_min.jpg" class="card-img-top" alt="AO BÀ OM">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge bg-success">Cấp Quốc Gia</span>
+                        <span class="badge bg-secondary text-white ms-1">TP. Trà Vinh</span>
+                    </div>
+                    <h5 class="card-title fw-bold">Phước Minh Cung</h5>
+                    <p class="card-text text-muted small flex-grow-1">Đây là di sản văn hóa vật thể tiếp theo của vùng đất Trà Vinh, đại diện cho những nét đặc sắc kiến trúc tâm linh tín ngưỡng cổ kính, là tài liệu lưu trữ vô giá phục vụ nghiên cứu và phát triển du lịch địa phương.</p>
+                    <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#heritageModal"
+               data-title="Phước Minh Cung"
+               data-img="https://luhanhvietnam.com.vn/du-lich/vnt_upload/news/03_2024/phuoc_minh_cung_tra_vinh_thamhiemmekong_min.jpg"
+               data-badge1="Cấp Quốc Gia"
+               data-badge2="TP. Trà Vinh"
+               data-arch="Kiến trúc 'Nội công ngoại quốc truyền thống' Trung Hoa"
+               data-faith="Tín ngưỡng dân gian (Thờ Quan Thánh Đế Quân)"
+               data-details="Được ví như một “bảo tàng mỹ thuật” với các tác phẩm chạm khắc gỗ tinh xảo.|Ngôi chùa cổ có niên đại lâu đời, gắn liền với lịch sử cộng đồng người Hoa tại Trà Vinh.|Trung tâm sinh hoạt văn hóa tâm linh sầm uất ngay giữa lòng đô thị."
+               data-link="ndphuocminhcung.html"></a>
+                </div> <!-- Kết thúc card-body -->
+            </div> <!-- Kết thúc card heritage-card -->
+        </div> <!-- Kết thúc col -->
+        </div> <!-- Đóng thẻ Row duy nhất -->
+</section>
+
+    <div class="modal fade" id="heritageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-bold" id="modalTitle"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+    <img id="modalImg" src="" class="img-fluid rounded-3 mb-3 w-100" style="height: 250px; object-fit: cover;">
+    <div class="mb-3">
+        <span class="badge bg-success heritage-badge" id="modalBadge1"></span>
+        <span class="badge bg-secondary heritage-badge" id="modalBadge2"></span>
+    </div>
+    <p class="mb-2"><strong>Kiến trúc:</strong> <span id="modalArch"></span></p>
+    <p class="mb-3"><strong>Tín ngưỡng:</strong> <span id="modalFaith"></span></p>
+    <ul class="modal-info-list" id="modalDetails"></ul>
+    <a href="#" id="modalLink" class="btn-link-custom">Xem chi tiết bài viết</a>
+</div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const heritageModal = document.getElementById('heritageModal');
+heritageModal.addEventListener('show.bs.modal', event => {
+    const btn = event.relatedTarget;
+            document.getElementById('modalTitle').textContent = btn.getAttribute('data-title');
+            document.getElementById('modalImg').src = btn.getAttribute('data-img');
+            document.getElementById('modalBadge1').textContent = btn.getAttribute('data-badge1');
+            document.getElementById('modalBadge2').textContent = btn.getAttribute('data-badge2');
+            document.getElementById('modalArch').textContent = btn.getAttribute('data-arch');
+            document.getElementById('modalFaith').textContent = btn.getAttribute('data-faith');
+            document.getElementById('modalLink').href = btn.getAttribute('data-link');
+
+            const details = btn.getAttribute('data-details').split('|');
+            const list = document.getElementById('modalDetails');
+            list.innerHTML = '';
+            details.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
