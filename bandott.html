@@ -1,96 +1,206 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Di Sản Trà Vinh - Bản đồ tương tác</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
     <style>
+
         .btn-home { background-color: blue; color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; font-family: sans-serif; text-decoration: none; display: inline-block; }
+
         body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; }
+
         #map { height: 100%; width: 100%; z-index: 1; }
+
         .sidebar { position: absolute; top: 20px; left: 20px; width: 360px; height: 90vh; background: rgba(255, 255, 255, 0.98); z-index: 1000; padding: 25px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); overflow-y: auto; }
+
         .header-brand { color: #8b4513; font-weight: 800; margin-bottom: 20px; border-bottom: 3px solid #8b4513; padding-bottom: 10px; }
+
         .btn-filter { width: 100%; margin-bottom: 10px; text-align: left; }
+
     </style>
+
 </head>
+
 <body>
 
+
+
 <div class="sidebar">
+
     <h4 class="header-brand">Di Sản Trà Vinh</h4>
+
     <input type="text" id="searchInput" class="form-control mb-3" placeholder="🔍 Tìm kiếm địa danh..." oninput="window.updateMap()">
+
     <div>
+
         <button class="btn btn-outline-primary btn-filter" onclick="window.updateMap('vatthe')">🏛 Di sản vật thể</button>
+
         <button class="btn btn-outline-primary btn-filter" onclick="window.updateMap('phivatthe')">🎭 Di sản phi vật thể</button>
+
         <button class="btn btn-outline-success btn-filter" onclick="window.updateMap('amthuc')">🍜 Ẩm thực</button>
+
         <button class="btn btn-outline-secondary btn-filter" onclick="window.updateMap('tatca')">🔄 Hiển thị tất cả</button>
+
     </div>
+
     <div class="mt-4 pt-3 border-top">
+
         <h5>Góc chia sẻ</h5>
+
         <div id="commentList" class="mb-3" style="max-height: 200px; overflow-y: auto;"></div>
+
         <input type="text" id="userName" class="form-control mb-2" placeholder="Tên của bạn...">
+
         <textarea id="commentText" class="form-control mb-2" placeholder="Cảm nhận của bạn..."></textarea>
+
         <button class="btn btn-primary w-100" onclick="window.addComment()">Đăng bình luận</button>
+
         <p style="text-align: center; margin-top: 20px;">
+
             <a href="index.html" class="btn-home">Trở về trang chủ</a>
+
         </p>
+
     </div>
+
 </div>
+
+
 
 <div id="map"></div>
 
+
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
+
+
 <script type="module">
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
+
+
     const firebaseConfig = {
+
         apiKey: "AIzaSyBWulU9wFxxv1q6zeFyoVuiqIsjS4E5fLg",
+
         authDomain: "disantravinh.firebaseapp.com",
+
         projectId: "disantravinh",
+
         storageBucket: "disantravinh.firebasestorage.app",
+
         messagingSenderId: "814049061456",
+
         appId: "1:814049061456:web:db994d411fba4401143f55"
+
     };
 
+
+
     const databaseURL = "https://disantravinh-default-rtdb.asia-southeast1.firebasedatabase.app/";
+
     const app = initializeApp(firebaseConfig);
+
     const db = getDatabase(app, databaseURL);
+
     const commentsRef = ref(db, 'comments/');
 
+
+
     const map = L.map('map').setView([9.9321, 106.3482], 14);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+
+
     const locations = [
+
         { name: "Chùa Âng", lat: 9.915894, lng: 106.303563, type: "vatthe" },
+
         { name: "Ao Bà Om", lat: 9.918380, lng: 106.304129, type: "vatthe" },
+
         { name: "Chùa Hang", lat: 9.887290, lng: 106.345319, type: "vatthe"},
+
         { name: "Đền thờ Chủ Tịch Hồ Chí Minh", lat: 9.984015, lng: 106.330080, type: "vatthe"},
+
         { name: "Chùa Vàm Ray", lat: 9.656315, lng: 106.275113, type: "vatthe"},
+
         { name: "Phước Minh Cung", lat: 9.934734, lng: 106.341090, type: "vatthe"},
+
         { name: "Miếu Bà Chúa Xứ Thị Trấn Mỹ Long", lat: 9.810552, lng: 106.513244, type: "phivatthe", event: "Lễ Hội Cúng Biển Mỹ Long"},
+        {name: "Cầu Tàu Biển Mỹ Long 'Bến Nghinh Ông' (Chuẩn bị nghi thức Nghinh Nam Hải (rước Ông) và tống tàu ra khơi)", lat: 9.812834, lng: 106.511968, type: "phivatthe", event: "Lễ Hội Cúng Biển Mỹ Long"},
+
+        {name: "Khu di tích Danh Thắng Ao Bà Om (lễ khai mạc Tuần lễ Văn hóa, nghi thức cúng Trăng cổ truyền, đêm hội chính, thả đèn gió và các trò chơi dân gian)", lat: 9.918327, lng: 106.304177, type: "phivatthe", event: "Lễ Hội Ok Om Bok"},
+
+        {name: "Bờ Sông Long Bình (địa điểm diễn ra hội đua ghe Ngo và hội thi thả đèn nước trên sông)", lat: 9.945577, lng: 106.347179, type: "phivatthe", event: "Lễ Hội Ok Om Bok"},
+
+        {name: "Trung Tâm Văn Hóa P. Trà Vinh (tổ chức các hoạt động hội chợ xúc tiến thương mại, không gian triển lãm trang phục, biểu diễn nhạc ngũ âm và khu hội ẩm thực Nam Bộ)", lat: 9.925079796986013, lng: 106.32774119635846, type: "phivatthe", event: "Lễ Hội Ok Om Bok"},
+
+        {name: "Vạn Niên Phong Cung ( nơi diễn ra tất cả nghi thức tế lễ chính và hành lễ quan trọng nhất của toàn bộ kỳ Vu lan Thắng hội)", lat: 9.871974729816008, lng: 106.05778463868693, type: "phivatthe", event: "Lễ Hội Vu Lan Thắng Hội"},
+
+        {name: "Vạn Ứng Phong Cung (Nơi phối hợp tổ chức các nghi thức Thỉnh Thần, Thỉnh Phật và là lộ trình di chuyển của đoàn diễu hành rước lễ)", lat: 9.881720588550401, lng: 106.06666543101596, type: "phivatthe", event: "Lễ Hội Vu Lan Thắng Hội"},
+
+        {name: "Thiên Đức Cung (Nơi phối hợp tổ chức các nghi thức Thỉnh Thần, Thỉnh Phật và là lộ trình di chuyển của đoàn diễu hành rước lễ)", lat: 9.885740572365505, lng: 106.0745072945095, type: "phivatthe", event: "Lễ Hội Vu Lan Thắng Hội"},
+        
+
         { name: "Bún Nước Lèo Cô Ba", lat: 9.940293, lng: 106.333460, type: "amthuc"},
+
         { name: "Bún nước lèo Dũng Chưởng", lat: 9.928608530460554, lng: 106.34260803868729, type: "amthuc"},
+
         { name: "Bún Nước Lèo Hương Trà", lat: 9.946138353137076, lng: 106.33985733868737, type: "amthuc"},
+
         { name: "Bánh tét Trà Cuôn Hai Lý", lat: 9.859724731138773, lng: 106.41500076583961, type: "amthuc"},
+
         { name: "Bánh Tét Trà Cuôn - Như Ý 2", lat: 9.861416281185777, lng: 106.4077334368383, type: "amthuc"},
+
         { name: "Lò Bánh Tét Cô Hường", lat: 9.851090675102713, lng: 106.35244692790386, type: "amthuc"},
+
         { name: "Công ty Chế biến Dừa sáp Vicosap", lat: 9.945429674823117, lng: 106.1042820963585, type: "amthuc"},
+
         { name: "Bánh canh Bến Có Út Hảo", lat: 9.926358815430374, lng: 106.2996922477404, type: "amthuc"},
+
         { name: "Ẩm Thực Sao Biển Ba Động", lat: 9.61513876510389, lng: 106.55517049918188, type: "amthuc", event: "Chù Ụ Rang Me"},
+
         { name: "Bánh Xèo Phú Hòa", lat: 9.94463071940514, lng: 106.33337375402972, type: "amthuc"},
+
         { name: "Bánh Xèo Nysenl", lat: 9.944670903317373, lng: 106.33307475765679, type: "amthuc"},
+
         { name: "Chợ Cầu Kè", lat: 9.872924559190182, lng: 106.05558846382522, type: "amthuc"},
+
          { name: "Chùa Âng", lat: 9.915894, lng: 106.303563, type: "tatca" },
+
         { name: "Ao Bà Om", lat: 9.918380, lng: 106.304129, type: "tatca" },
 
 
 
+
+
+
+
         { name: "Chùa Hang", lat: 9.887290, lng: 106.345319, type: "vatthe"},
+
+
+
+
 
 
 
@@ -98,7 +208,15 @@
 
 
 
+
+
+
+
         { name: "Chùa Vàm Ray", lat: 9.656315, lng: 106.275113, type: "tatca"},
+
+
+
+
 
 
 
@@ -106,7 +224,15 @@
 
 
 
+
+
+
+
         {name: "Miếu Bà Chúa Xứ Thị Trấn Mỹ Long (khai mạc, tế lễ chính và hát bóng rỗi)", lat: 9.810552, lng: 106.513244, type: "tatca", event: "Lễ Hội Cúng Biển Mỹ Long"},
+
+
+
+
 
 
 
@@ -114,7 +240,15 @@
 
 
 
+
+
+
+
         {name: "Khu di tích Danh Thắng Ao Bà Om (lễ khai mạc Tuần lễ Văn hóa, nghi thức cúng Trăng cổ truyền, đêm hội chính, thả đèn gió và các trò chơi dân gian)", lat: 9.918327, lng: 106.304177, type: "tatca", event: "Lễ Hội Ok Om Bok"},
+
+
+
+
 
 
 
@@ -122,7 +256,15 @@
 
 
 
+
+
+
+
         {name: "Trung Tâm Văn Hóa P. Trà Vinh (tổ chức các hoạt động hội chợ xúc tiến thương mại, không gian triển lãm trang phục, biểu diễn nhạc ngũ âm và khu hội ẩm thực Nam Bộ)", lat: 9.925079796986013, lng: 106.32774119635846, type: "tatca", event: "Lễ Hội Ok Om Bok"},
+
+
+
+
 
 
 
@@ -130,7 +272,15 @@
 
 
 
+
+
+
+
         {name: "Vạn Ứng Phong Cung (Nơi phối hợp tổ chức các nghi thức Thỉnh Thần, Thỉnh Phật và là lộ trình di chuyển của đoàn diễu hành rước lễ)", lat: 9.881720588550401, lng: 106.06666543101596, type: "tatca", event: "Lễ Hội Vu Lan Thắng Hội"},
+
+
+
+
 
 
 
@@ -138,7 +288,15 @@
 
 
 
+
+
+
+
         {name: "Miếu ông Tà - Neak Ta Bos (nghi thức thỉnh sư tụng kinh cầu an, dâng lễ vật heo quay, gà luộc và biểu diễn nhạc ngũ âm rộn ràng để cầu mùa màng tươi tốt)", lat: 9.914405099744162, lng: 106.29120446567417, type: "tatca", event: "Lễ Hội Đom Lơng Néak Tà "},
+
+
+
+
 
 
 
@@ -146,7 +304,15 @@
 
 
 
+
+
+
+
         {name: "Bún nước lèo Dũng Chưởng (Quán bình dân cực kỳ đông khách, nổi tiếng với heo quay da siêu giòn và giá thành rất rẻ)", lat: 9.928608530460554, lng: 106.34260803868729, type: "tatca"},
+
+
+
+
 
 
 
@@ -154,7 +320,15 @@
 
 
 
+
+
+
+
         {name: "Bánh tét Trà Cuôn Hai Lý", lat: 9.859724731138773, lng: 106.41500076583961, type: "tatca"},
+
+
+
+
 
 
 
@@ -162,7 +336,15 @@
 
 
 
+
+
+
+
         {name: "Lò Bánh Tét Cô Hường CHÍNH HÃNG ", lat: 9.851090675102713, lng: 106.35244692790386, type: "tatca"},
+
+
+
+
 
 
 
@@ -170,7 +352,15 @@
 
 
 
+
+
+
+
         {name: "Bánh canh Bến Có Út Hảo", lat: 9.926358815430374, lng: 106.2996922477404, type: "tatca"},
+
+
+
+
 
 
 
@@ -178,7 +368,15 @@
 
 
 
+
+
+
+
         {name: "Bánh Xèo Phú Hòa", lat: 9.94463071940514, lng: 106.33337375402972, type: "tatca"},
+
+
+
+
 
 
 
@@ -186,59 +384,118 @@
 
 
 
+
+
+
+
         {name: "Chợ Cầu Kè", lat: 9.872924559190182, lng: 106.05558846382522, type: "tatca"},
+
     ];
 
+
+
     let markers = [];
+
     let routingControl = null;
+
     let userPos = null;
 
+
+
     window.updateMap = function(type = 'tatca') {
+
         if (routingControl) { map.removeControl(routingControl); routingControl = null; }
+
         markers.forEach(m => map.removeLayer(m));
+
         markers = [];
+
         const query = document.getElementById('searchInput').value.toLowerCase();
+
         locations.forEach(loc => {
+
             if ((type === 'tatca' || loc.type === type) && (loc.name.toLowerCase().includes(query))) {
+
                 let m = L.marker([loc.lat, loc.lng]).addTo(map)
+
                     .bindPopup(`<strong>${loc.name}</strong><br><button class="btn btn-sm btn-info mt-2" onclick="window.startRouting(${loc.lat}, ${loc.lng})">📍 Chỉ đường</button>`);
+
                 markers.push(m);
+
             }
+
         });
+
     };
+
+
 
     window.startRouting = function(lat, lng) {
+
         if (!userPos) { alert("Đang xác định vị trí..."); return; }
+
         if (routingControl) map.removeControl(routingControl);
+
         routingControl = L.Routing.control({ waypoints: [L.latLng(userPos.lat, userPos.lng), L.latLng(lat, lng)], routeWhileDragging: true }).addTo(map);
+
     };
+
+
 
     map.on('locationfound', e => { userPos = e.latlng; L.marker(userPos).addTo(map).bindPopup("Bạn ở đây").openPopup(); });
+
     map.locate({setView: true, maxZoom: 14});
 
+
+
     window.addComment = function() {
+
         const user = document.getElementById('userName').value || "Người ẩn danh";
+
         const text = document.getElementById('commentText').value;
+
         if(text.trim()) { 
+
             push(commentsRef, { username: user, comment: text }); 
+
             document.getElementById('commentText').value = ''; 
+
         }
+
     };
 
+
+
     onValue(commentsRef, (snapshot) => {
+
         const data = snapshot.val();
+
         const list = document.getElementById('commentList');
+
         list.innerHTML = '';
+
         if (data) {
+
             Object.values(data).reverse().forEach(c => {
+
                 const div = document.createElement('div');
+
                 div.className = 'p-2 mb-2 bg-light rounded';
+
                 div.innerHTML = `<strong>${c.username}:</strong> ${c.comment}`;
+
                 list.appendChild(div);
+
             });
+
         }
+
     });
+
 </script>
 
+
+
 </body>
+
 </html>
