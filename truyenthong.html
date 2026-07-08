@@ -120,27 +120,41 @@
             </div>
 
             <div class="d-flex align-items-center gap-3">
-                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm làng nghề...">
-                    <button class="btn btn-outline-light" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                
             </div>
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg bg-custom-nav navbar-dark sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="vatthe.html">Di Sản Vật Thể</a></li>
-                    <li class="nav-item"><a class="nav-link" href="phivatthe.html">Di Sản Phi Vật Thể</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="truyenthong.html">Làng Nghề Truyền Thống</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Lễ Hội & Sự Kiện</a></li>
-                    <li class="nav-item"><a class="nav-link" href="bandott.html">Bản Đồ Tương Tác</a></li>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item"> 
+                        <a class="nav-link active text-accent" href="index.html">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
+                            Khám phá di sản
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
+                            <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
+                            <li><a class="dropdown-item" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                            <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link text-white" href="bandott.html"><i class="fa-solid fa-map-location-dot me-1"></i> Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa-solid fa-calendar-days me-1"></i> Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa-solid fa-newspaper me-1"></i> Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa-solid fa-circle-info me-1"></i> Giới thiệu</a></li>
                 </ul>
             </div>
         </div>

@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Google Fonts: Font chữ đẹp cho tiêu đề và nội dung -->
     <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Leaflet Thư viện bản đồ CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
         /* ============================
@@ -122,17 +124,18 @@
         }
 
         /* ============================
-           BẢN ĐỒ GIẢ LẬP
-           Khung chờ nhúng Leaflet/Google Maps
+           KHUNG BẢN ĐỒ SỐ GIS
         ============================= */
-        .map-placeholder {
+        .map-wrapper {
             height: 400px;
-            background: #e5e3df;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed var(--secondary-color); /* Viền nét đứt */
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--secondary-color);
+        }
+        #map {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -143,58 +146,39 @@
          Chứa logo + thanh tìm kiếm + ngôn ngữ
     ============================= -->
     <header class="bg-custom-header text-white py-2 shadow-sm">
-        <!-- .container: Giới hạn chiều rộng nội dung, căn giữa trang -->
         <div class="container d-flex justify-content-between align-items-center">
-
             <!-- Logo bên trái -->
             <div class="d-flex align-items-center">
-                <!-- fa-gopuram: Icon tháp chùa từ Font Awesome -->
                 <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
                 <span class="fs-4 tracking-wide text-accent navbar-brand">Di Sản Trà Vinh</span>
             </div>
 
-            <!-- Thanh tìm kiếm + badge ngôn ngữ bên phải -->
-            <div class="d-flex align-items-center gap-3">
-                <!-- d-none d-md-flex: Ẩn trên mobile, hiện từ màn hình md trở lên -->
-                <div class="input-group input-group-sm d-none d-md-flex" style="width: 250px;">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm di sản...">
-                    <button class="btn btn-outline-light" type="button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
-                <!-- Badge ngôn ngữ VI/EN -->
-                
-            </div>
+            <!-- Thanh tìm kiếm bên phải -->
+            
         </div>
     </header>
 
     <!-- ============================
          2. NAVBAR (Thanh điều hướng)
-         sticky-top: Dính trên cùng khi cuộn trang
-         navbar-expand-lg: Mở rộng menu từ màn hình lg
     ============================= -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
         <div class="container">
-            <!-- Nút hamburger hiện trên mobile khi menu bị thu gọn -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Danh sách menu - ẩn/hiện theo nút hamburger trên mobile -->
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav gap-lg-4 text-uppercase">
                     <li class="nav-item"> 
-                        <a class="nav-link active text-accent" href="#">
-                            <i class="fa-solid fa-house me-1" href="index.html"></i> Trang chủ
+                        <a class="nav-link active text-accent" href="index.html">
+                            <i class="fa-solid fa-house me-1"></i> Trang chủ
                         </a>
                     </li>
 
-                    <!-- Dropdown menu: Khám phá di sản -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
                             Khám phá di sản
                         </a>
-                        <!-- Danh sách thả xuống -->
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
                             <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
@@ -203,10 +187,10 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item"><a class="nav-link text-white" href="bandott.html">Bản đồ tương tác</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="bandott.html"><i class="fa-solid fa-map-location-dot me-1"></i> Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="lichevent.html"><i class="fa-solid fa-calendar-days me-1"></i> Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="tintuc.html"><i class="fa-solid fa-newspaper me-1"></i> Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa-solid fa-circle-info me-1"></i> Giới thiệu</a></li>
                 </ul>
             </div>
         </div>
@@ -214,12 +198,8 @@
 
     <!-- ============================
          3. HERO CAROUSEL (Slider ảnh lớn)
-         data-bs-ride="carousel": Tự động chạy
-         3 slide tương ứng 3 chủ đề di sản
     ============================= -->
     <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
-
-        <!-- Chấm chỉ thị slide đang hiển thị -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
@@ -227,9 +207,7 @@
         </div>
 
         <div class="carousel-inner">
-            <!-- Slide 1: Chủ đề giao thoa văn hóa -->
             <div class="carousel-item active" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://egoldship.vn/vnt_upload/news/tra_vinh_12_15_38_13_300.jpg')">
-                <!-- d-none d-md-block: Ẩn caption trên mobile -->
                 <div class="carousel-caption d-none d-md-block text-start start-5">
                     <div class="carousel-caption-custom">
                         <h2 class="text-accent">TRÀ VINH: NƠI GIAO THOA VĂN HÓA KINH - KHMER - HOA</h2>
@@ -239,7 +217,6 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Lễ hội Ok Om Bok -->
             <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://skydoor.net/Download?mode=entry&size=640&id=4208')">
                 <div class="carousel-caption d-none d-md-block text-start start-5">
                     <div class="carousel-caption-custom">
@@ -249,7 +226,6 @@
                 </div>
             </div>
 
-            <!-- Slide 3: Danh thắng Ao Bà Om -->
             <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://thamhiemmekong.com/wp-content/uploads/2020/06/aobaom-02.jpg')">
                 <div class="carousel-caption d-none d-md-block text-start start-5">
                     <div class="carousel-caption-custom">
@@ -260,7 +236,6 @@
             </div>
         </div>
 
-        <!-- Nút điều hướng trái/phải -->
         <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
@@ -271,25 +246,16 @@
 
     <!-- ============================
          4. TỔNG QUAN VĂN HÓA
-         Layout 2 cột: tiêu đề trái, 3 hộp văn hóa phải
-         .container: Căn giữa và giới hạn chiều rộng
-         .row + .col-*: Hệ thống lưới Bootstrap 12 cột
     ============================= -->
     <section class="container my-5">
         <div class="row align-items-center g-4">
-
-            <!-- Cột trái: Tiêu đề và mô tả (chiếm 4/12 cột trên lg) -->
             <div class="col-lg-4">
                 <h2 class="border-bottom border-danger pb-2 text-uppercase">Tổng quan Văn Hóa</h2>
                 <p class="text-muted">Trà Vinh tự hào sở hữu bảo tàng sống động về sự gắn kết, chung sống hòa bình lâu đời của ba cộng đồng dân tộc đồng cốt, cấu thành nên một kho tàng di sản độc nhất vô nhị miền Tây Nam Bộ.</p>
             </div>
 
-            <!-- Cột phải: 3 hộp văn hóa (chiếm 8/12 cột trên lg) -->
             <div class="col-lg-8">
-                <!-- g-3: Khoảng cách giữa các cột con -->
                 <div class="row g-3">
-
-                    <!-- Hộp 1: Văn hóa Kinh -->
                     <div class="col-sm-4">
                         <div class="culture-box">
                             <div class="culture-icon"><i class="fa-solid fa-user-tie"></i></div>
@@ -298,7 +264,6 @@
                         </div>
                     </div>
 
-                    <!-- Hộp 2: Văn hóa Khmer -->
                     <div class="col-sm-4">
                         <div class="culture-box">
                             <div class="culture-icon"><i class="fa-solid fa-dharmachakra"></i></div>
@@ -307,10 +272,8 @@
                         </div>
                     </div>
 
-                    <!-- Hộp 3: Văn hóa Hoa -->
                     <div class="col-sm-4">
                         <div class="culture-box">
-                            <!-- fa-yin-yang: Icon âm dương đúng tên -->
                             <div class="culture-icon"><i class="fa-solid fa-yin-yang"></i></div>
                             <h5>Văn Hóa Hoa</h5>
                             <small class="text-muted">Các hội quán, Thất Phủ Miếu cổ xưa, kiến trúc chạm khắc tinh xảo cùng lễ hội Vu Lan.</small>
@@ -323,9 +286,6 @@
 
     <!-- ============================
          5. DI SẢN NỔI BẬT & BẢN ĐỒ
-         Layout 2 cột lớn:
-         - Trái (7/12): Lưới 4 thẻ di sản
-         - Phải (5/12): Bộ lọc + bản đồ
     ============================= -->
     <section class="container my-5">
         <div class="row g-5">
@@ -341,16 +301,11 @@
                     </button>
                 </div>
 
-                <!-- Lưới 2x2 thẻ di sản -->
                 <div class="row g-3">
-
-                    <!-- Thẻ 1: Chùa Hang -->
                     <div class="col-sm-6">
                         <div class="card heritage-card">
-                            <!-- object-fit: cover trong CSS giữ ảnh không bị méo -->
                             <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuahangtravinh-5.jpg" class="card-img-top" alt="Chùa Hang">
                             <div class="card-body">
-                                <!-- Badge màu phân loại di sản -->
                                 <span class="badge bg-success mb-2">Vật thể (Chùa Khmer)</span>
                                 <h5 class="card-title">Chùa Hang (Kompong Chray)</h5>
                                 <p class="card-text text-muted small">Ngôi chùa mang vẻ đẹp hoang sơ tự nhiên với cổng hang độc đáo và xưởng khắc gỗ nghệ thuật sầm uất bên trong.</p>
@@ -358,7 +313,6 @@
                         </div>
                     </div>
 
-                    <!-- Thẻ 2: Nghệ thuật Dù-kê -->
                     <div class="col-sm-6">
                         <div class="card heritage-card">
                             <img src="https://i.pinimg.com/736x/52/c7/05/52c7055029d585b78e8ee66a23e130fd.jpg" class="card-img-top" alt="Nghệ thuật Dù Kê">
@@ -370,7 +324,6 @@
                         </div>
                     </div>
 
-                    <!-- Thẻ 3: Bánh tét Trà Cuôn -->
                     <div class="col-sm-6">
                         <div class="card heritage-card">
                             <img src="https://mia.vn/media/uploads/blog-du-lich/banh-tet-tra-cuon-01-1706664373.jpeg" class="card-img-top" alt="Bánh tét Trà Cuôn">
@@ -382,7 +335,6 @@
                         </div>
                     </div>
 
-                    <!-- Thẻ 4: Chùa Âng -->
                     <div class="col-sm-6">
                         <div class="card heritage-card">
                             <img src="https://thamhiemmekong.com/wp-content/uploads/2020/03/chuaang-2.jpg" class="card-img-top" alt="Chùa Âng">
@@ -396,7 +348,7 @@
                 </div>
             </div>
 
-            <!-- === CỘT PHẢI: Bản đồ & bộ lọc === -->
+            <!-- === CỘT PHẢI: Bản đồ số GIS & Bộ lọc === -->
             <div class="col-lg-5">
                 <div class="mb-4">
                     <h2 class="text-uppercase">
@@ -407,43 +359,39 @@
                 <!-- Thẻ bộ lọc khu vực -->
                 <div class="card p-3 shadow-sm bg-white border-0 mb-3">
                     <h6 class="fw-bold mb-3">
-                        <i class="fa-solid fa-filter me-1 text-secondary"></i> Bộ lọc khu vực
+                        <i class="fa-solid fa-filter me-1 text-secondary"></i> Bộ lọc tương tác
                     </h6>
                     <div class="row g-2">
                         <!-- Select 1: Lọc theo huyện/thành phố -->
                         <div class="col-sm-6">
-                            <select class="form-select form-select-sm">
-                                <option selected>-- Chọn Huyện/Thành phố --</option>
-                                <option>Thành phố Trà Vinh (Mở rộng)</option>
-                                <option>Thị xã Duyên Hải</option>
-                                <option>Huyện Cầu Kè</option>
-                                <option>Huyện Tiểu Cần</option>
-                                <option>Huyện Trà Cú</option>
-                                <option>Huyện Châu Thành</option>
-                                <option>Huyện Càng Long</option>
-                                <option>Huyện Cầu Ngang</option>
-                                <option>Huyện Duyên Hải</option>
+                            <select class="form-select form-select-sm" id="filterDistrict">
+                                <option value="" selected>-- Chọn Huyện/Thành phố --</option>
+                                <option value="TPTV">Thành phố Trà Vinh</option>
+                                <option value="CK">Huyện Cầu Kè</option>
+                                <option value="CT">Huyện Châu Thành</option>
+                                <option value="CN">Huyện Cầu Ngang</option>
+                                <option value="TRACU">Huyện Trà Cú</option>
+                                <option value="DH">Thị xã Duyên Hải</option>
+                                <option value="TC">Huyện Tiểu Cần</option>
+                                <option value="CL">Huyện Càng Long</option>
+                                <option value="DHE">Huyện Duyên Hải</option>
                             </select>
                         </div>
                         <!-- Select 2: Lọc theo loại hình di sản -->
                         <div class="col-sm-6">
-                            <select class="form-select form-select-sm">
-                                <option selected>-- Loại hình di sản --</option>
-                                <option>Di sản vật thể</option>
-                                <option>Di sản phi vật thể</option>
-                                <option>Ẩm thực & Làng nghề</option>
+                            <select class="form-select form-select-sm" id="filterType">
+                                <option value="" selected>-- Loại hình di sản --</option>
+                                <option value="vat_the">Di sản vật thể</option>
+                                <option value="phi_vat_the">Di sản phi vật thể</option>
+                                <option value="am_thuc">Ẩm thực & Làng nghề</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- Khung giữ chỗ cho bản đồ GIS (Leaflet/Google Maps) -->
-                <div class="map-placeholder">
-                    <div class="text-center">
-                        <i class="fa-solid fa-map-pin text-danger fs-1 mb-2"></i>
-                        <p class="mb-0 fw-medium text-secondary">Hệ thống Bản đồ Số GIS</p>
-                        <small class="text-muted">(Nhúng Leaflet API / Google Maps API tại khối này)</small>
-                    </div>
+                <!-- Khung hiển thị Bản đồ thực tế từ Leaflet -->
+                <div class="map-wrapper">
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
@@ -451,13 +399,10 @@
 
     <!-- ============================
          6. FOOTER
-         border-top border-warning: Viền vàng trên cùng footer
-         3 cột: Giới thiệu | Liên kết | Đơn vị thực hiện
     ============================= -->
     <footer class="bg-dark text-white-50 pt-5 pb-3 border-top border-4 border-warning">
         <div class="container">
             <div class="row g-4">
-
                 <!-- Cột 1: Giới thiệu dự án -->
                 <div class="col-md-4">
                     <h5 class="text-white mb-3 text-accent">
@@ -467,9 +412,17 @@
                 </div>
 
                 <!-- Cột 2: Liên kết nhanh -->
-                
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Liên kết tra cứu</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="vatthe.html" class="text-white-50 text-decoration-none"><i class="fa-solid fa-angle-right me-1"></i> Di sản Vật thể</a></li>
+                        <li class="mb-2"><a href="phivatthe.html" class="text-white-50 text-decoration-none"><i class="fa-solid fa-angle-right me-1"></i> Di sản Phi vật thể</a></li>
+                        <li class="mb-2"><a href="amthuc.html" class="text-white-50 text-decoration-none"><i class="fa-solid fa-angle-right me-1"></i> Ẩm thực đặc sản</a></li>
+                        <li class="mb-2"><a href="bandott.html" class="text-white-50 text-decoration-none"><i class="fa-solid fa-angle-right me-1"></i> Bản đồ số tương tác</a></li>
+                    </ul>
+                </div>
 
-                <!-- Cột 3: Thông tin nhóm - căn phải trên md -->
+                <!-- Cột 3: Thông tin nhóm -->
                 <div class="col-md-4 text-md-end">
                     <h5 class="text-white mb-3">Đơn vị thực hiện</h5>
                     <p class="small mb-1">Đồ án Nhóm sinh viên Công nghệ thông tin</p>
@@ -477,10 +430,8 @@
                 </div>
             </div>
 
-            <!-- Đường kẻ ngang phân cách -->
             <hr class="mt-4 mb-3 border-secondary">
 
-            <!-- Copyright + icon mạng xã hội -->
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small">
                 <span>&copy; 2026 Tra Vinh Heritage Project. All rights reserved.</span>
                 <div class="d-flex gap-3 fs-5 mt-2 mt-sm-0">
@@ -492,7 +443,165 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle (bao gồm Popper.js cho dropdown, carousel) -->
+    <!-- ============================
+         THƯ VIỆN SCRIPT XỬ LÝ MAP VÀ FILTER
+    ============================= -->
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS API -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // 1. Khởi tạo thực thể Bản đồ số
+        var map = L.map('map', {
+            center: [9.9360, 106.3392],
+            zoom: 10,
+            scrollWheelZoom: false 
+        });
+
+        // Nhúng nền bản đồ mở địa lý vệ tinh tuyến đường công cộng công nghệ OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 2. Toàn bộ mảng cơ sở dữ liệu đã chuẩn hóa 100% tọa độ thực tế và phân chia quận huyện của bạn
+        var heritageSites = [
+            // --- DI SẢN VẬT THỂ ---
+            { name: "Chùa Âng", coords: [9.915894, 106.303563], type: "vatthe", district: "TPTV", desc: "Ngôi chùa Khmer cổ kính nằm hài hòa cạnh danh thắng Ao Bà Om." },
+            { name: "Ao Bà Om", coords: [9.918380, 106.304129], type: "vatthe", district: "TPTV", desc: "Danh lam thắng cảnh nổi tiếng với hồ nước và hàng cây cổ thụ." },
+            { name: "Chùa Hang", coords: [9.887290, 106.345319], type: "vatthe", district: "CT", desc: "Ngôi chùa với cổng hang tự nhiên độc đáo và xưởng khắc gỗ nghệ thuật." },
+            { name: "Đền thờ Chủ Tịch Hồ Chí Minh", coords: [9.984015, 106.330080], type: "vatthe", district: "TPTV", desc: "Di tích lịch sử văn hóa cấp quốc gia tại xã Long Đức." },
+            { name: "Chùa Vàm Ray", coords: [9.656315, 106.275113], type: "vatthe", district: "TRACU", desc: "Ngôi chùa mang kiến trúc Angkor nguy nga, rực rỡ sắc vàng ròng." },
+            { name: "Phước Minh Cung", coords: [9.934734, 106.341090], type: "vatthe", district: "TPTV", desc: "Chùa Ông - công trình kiến trúc nghệ thuật tiêu biểu của người Hoa." },
+
+            // --- DI SẢN PHI VẬT THỂ (LỄ HỘI) ---
+            { name: "Miếu Bà Chúa Xứ Mỹ Long", coords: [9.810552, 106.513244], type: "phivatthe", district: "CN", desc: "Nơi diễn ra Lễ Hội Cúng Biển Mỹ Long truyền thống hàng năm." },
+            { name: "Cầu Tàu Biển Mỹ Long 'Bến Nghinh Ông'", coords: [9.812834, 106.511968], type: "phivatthe", district: "CN", desc: "Địa điểm chuẩn bị nghi thức Nghinh Nam Hải (rước Ông) và tống tàu ra khơi." },
+            { name: "Khu di tích Danh Thắng Ao Bà Om (Lễ hội)", coords: [9.918327, 106.304177], type: "phivatthe", district: "TPTV", desc: "Nơi khai mạc Lễ Hội Ok Om Bok, nghi thức cúng Trăng, thả đèn gió." },
+            { name: "Bờ Sông Long Bình", coords: [9.945577, 106.347179], type: "phivatthe", district: "TPTV", desc: "Địa điểm sôi động diễn ra hội đua ghe Ngo và thi thả đèn nước trên sông (Ok Om Bok)." },
+            { name: "Trung Tâm Văn Hóa P. Trà Vinh", coords: [9.925079796986013, 106.32774119635846], type: "phivatthe", district: "TPTV", desc: "Tổ chức không gian hội chợ thương mại, triển lãm nhạc ngũ âm, ẩm thực Nam Bộ." },
+            { name: "Vạn Niên Phong Cung", coords: [9.871974729816008, 106.05778463868693], type: "phivatthe", district: "CK", desc: "Nơi diễn ra tất cả nghi thức tế lễ chính quan trọng của Vu lan Thắng hội Cầu Kè." },
+            { name: "Vạn Ứng Phong Cung", coords: [9.881720588550401, 106.06666543101596], type: "phivatthe", district: "CK", desc: "Nơi phối hợp tổ chức các nghi thức Thỉnh Thần, Thỉnh Phật và rước lễ." },
+            { name: "Thiên Đức Cung", coords: [9.885740572365505, 106.0745072945095], type: "phivatthe", district: "CK", desc: "Nơi phối hợp tổ chức các nghi thức Thỉnh Thần, Thỉnh Phật và lộ trình rước lễ." },
+
+            // --- ẨM THỰC TRÀ VINH ---
+            { name: "Bún Nước Lèo Cô Ba", coords: [9.940293, 106.333460], type: "amthuc", district: "TPTV", desc: "Địa chỉ thưởng thức bún nước lèo chuẩn vị đặc sản Trà Vinh." },
+            { name: "Bún nước lèo Dũng Chưởng", coords: [9.928608530460554, 106.34260803868729], type: "amthuc", district: "TPTV", desc: "Quán bún nước lèo nổi tiếng đậm đà được người dân địa phương ưa chuộng." },
+            { name: "Bún Nước Lèo Hương Trà", coords: [9.946138353137076, 106.33985733868737], type: "amthuc", district: "TPTV", desc: "Không gian ẩm thực đặc sản bún nước lèo thơm ngon nức tiếng." },
+            { name: "Bánh tét Trà Cuôn Hai Lý", coords: [9.859724731138773, 106.41500076583961], type: "amthuc", district: "CT", desc: "Thương hiệu bánh tét Trà Cuôn gia truyền nổi tiếng dẻo bùi." },
+            { name: "Bánh Tét Trà Cuôn - Như Ý 2", coords: [9.861416281185777, 106.4077334368383], type: "amthuc", district: "CT", desc: "Điểm dừng chân mua sắm đặc sản bánh tét Trà Cuôn chất lượng." },
+            { name: "Lò Bánh Tét Cô Hường", coords: [9.851090675102713, 106.35244692790386], type: "amthuc", district: "CT", desc: "Lò bánh truyền thống giữ trọn hương vị bánh tét Nam Bộ." },
+            { name: "Công ty Chế biến Dừa sáp Vicosap", coords: [9.945429674823117, 106.1042820963585], type: "amthuc", district: "CK", desc: "Đơn vị tiên phong nâng tầm các sản phẩm chế biến sâu từ Dừa sáp Cầu Kè." },
+            { name: "Bánh canh Bến Có Út Hảo", coords: [9.926358815430374, 106.2996922477404], type: "amthuc", district: "CT", desc: "Đặc sản bánh canh Bến Có lòng heo giòn ngọt dai ngon." },
+            { name: "Ẩm Thực Sao Biển Ba Động", coords: [9.61513876510389, 106.55517049918188], type: "amthuc", district: "DH", desc: "Nơi nổi tiếng với món Chù Ụ Rang Me tại khu du lịch biển Ba Động." },
+            { name: "Bánh Xèo Phú Hòa", coords: [9.94463071940514, 106.33337375402972], type: "amthuc", district: "TPTV", desc: "Quán bánh xèo vỏ giòn rụm, nhân tôm thịt đậm đà ăn kèm rau rừng." },
+            { name: "Bánh Xèo Nysenl", coords: [9.944670903317373, 106.333307475765679], type: "amthuc", district: "TPTV", desc: "Điểm hẹn ẩm thực bánh xèo thơm ngon, sạch sẽ tại trung tâm." },
+            { name: "Chợ Cầu Kè", coords: [9.872924559190182, 106.05558846382522], type: "amthuc", district: "CK", desc: "Trung tâm giao thương sầm uất với nhiều món ngon bản địa Huyện Cầu Kè." }
+        ];
+
+        var markerLayers = [];
+
+        // 3. Hàm xử lý logic ẩn hoàn toàn huyện không có địa danh (Theo phân loại)
+        function updateDistrictFilterOptions(filteredType) {
+            var districtSelect = document.getElementById('filterDistrict');
+            var options = districtSelect.options;
+            var currentSelected = districtSelect.value;
+            var hasSelectedStillVisible = false;
+
+            for (var i = 1; i < options.length; i++) {
+                var districtCode = options[i].value;
+                
+                // Kiểm tra xem huyện có bất cứ dữ liệu nào khớp loại hình đang chọn không
+                var hasData = heritageSites.some(function(site) {
+                    var matchType = true;
+                    if (filteredType === "vat_the") matchType = (site.type === "vatthe");
+                    else if (filteredType === "phi_vat_the") matchType = (site.type === "phivatthe");
+                    else if (filteredType === "am_thuc") matchType = (site.type === "amthuc");
+                    
+                    return site.district === districtCode && matchType;
+                });
+
+                if (hasData) {
+                    options[i].style.display = ""; // Hiện huyện có dữ liệu
+                    if (districtCode === currentSelected) hasSelectedStillVisible = true;
+                } else {
+                    options[i].style.display = "none"; // Ẩn hoàn toàn huyện không có dữ liệu
+                }
+            }
+
+            // Nếu huyện đang chọn đột ngột bị ẩn sau khi chuyển loại hình, đưa bộ chọn về mặc định
+            if (currentSelected !== "" && !hasSelectedStillVisible) {
+                districtSelect.value = "";
+            }
+        }
+
+        // 4. Hàm vẽ các ghim vị trí địa danh
+        function renderMarkers(filteredDistrict, filteredType) {
+            markerLayers.forEach(marker => map.removeLayer(marker));
+            markerLayers = [];
+
+            heritageSites.forEach(function(site) {
+                var matchDistrict = !filteredDistrict || site.district === filteredDistrict;
+                
+                var matchType = true;
+                if (filteredType === "vat_the") matchType = (site.type === "vatthe");
+                else if (filteredType === "phi_vat_the") matchType = (site.type === "phivatthe");
+                else if (filteredType === "am_thuc") matchType = (site.type === "amthuc");
+
+                if (matchDistrict && matchType) {
+                    var marker = L.marker(site.coords).addTo(map);
+                    
+                    var popupContent = `
+                        <div style="font-family: 'Roboto', sans-serif; width: 200px; padding: 2px;">
+                            <h6 style="color: #800020; font-weight: bold; margin-bottom: 5px; font-size:14px;">${site.name}</h6>
+                            <p style="font-size: 11px; margin: 0; color: #555; line-height:1.4;">${site.desc}</p>
+                        </div>
+                    `;
+                    marker.bindPopup(popupContent);
+                    markerLayers.push(marker);
+                }
+            });
+        }
+
+        // Kích hoạt khởi động cấu hình lần đầu
+        updateDistrictFilterOptions('');
+        renderMarkers('', '');
+
+        // 5. Lắng nghe hành vi thay đổi Bộ lọc 1 (Chọn Huyện/Thành phố)
+        document.getElementById('filterDistrict').addEventListener('change', function() {
+            var selectedDistrict = this.value;
+            var selectedType = document.getElementById('filterType').value;
+            renderMarkers(selectedDistrict, selectedType);
+
+            // Điều khiển vị trí camera tập trung (Fly To) khi click chọn huyện cụ thể
+            if (selectedDistrict === "TPTV") {
+                map.flyTo([9.9392, 106.3195], 13);
+            } else if (selectedDistrict === "CK") {
+                map.flyTo([9.8729, 106.0555], 13);
+            } else if (selectedDistrict === "CT") {
+                map.flyTo([9.8872, 106.3453], 12);
+            } else if (selectedDistrict === "CN") {
+                map.flyTo([9.8105, 106.5132], 12);
+            } else if (selectedDistrict === "TRACU") {
+                map.flyTo([9.6563, 106.2751], 12);
+            } else if (selectedDistrict === "DH") {
+                map.flyTo([9.6151, 106.5551], 12);
+            } else if (selectedDistrict === "") {
+                map.flyTo([9.9360, 106.3392], 10);
+            }
+        });
+
+        // 6. Lắng nghe hành vi thay đổi Bộ lọc 2 (Chọn Loại hình di sản)
+        document.getElementById('filterType').addEventListener('change', function() {
+            var selectedType = this.value;
+            
+            // Chạy bộ lọc ẩn hiện các option Huyện trước
+            updateDistrictFilterOptions(selectedType);
+            
+            // Lấy lại giá trị huyện hợp lệ hiện tại để render ghim chính xác
+            var selectedDistrict = document.getElementById('filterDistrict').value;
+            renderMarkers(selectedDistrict, selectedType);
+        });
+    </script>
 </body>
 </html>

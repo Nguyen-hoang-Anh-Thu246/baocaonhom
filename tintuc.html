@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản Tin Tổng Quan Di Sản Trà Vinh</title>
+    
+    <!-- Bootstrap 5 & Font Awesome 6 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosophy&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #800020;   /* Đỏ trầm */
+            --secondary-color: #1b4d3e; /* Xanh lá đậm */
+            --accent-color: #d4af37;    /* Vàng gold */
+            --bg-light: #fdfaf4;        /* Nền kem nhạt */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Philosophy', serif;
+            font-weight: bold;
+        }
+
+        .bg-custom-header { background-color: var(--primary-color); }
+        .bg-custom-nav { background-color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+        .btn-accent:hover, .btn-accent.active {
+            background-color: #bfa030;
+            color: #000;
+        }
+
+        .page-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://mientaycogi.com/wp-content/uploads/2021/01/chua-hang-tra-vinh-1.jpg') center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        /* Thẻ Card tùy chỉnh: Tự động co giãn theo nội dung, không cắt chữ */
+        .news-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: none;
+            transition: transform 0.3s;
+            height: 100%; /* Giúp các card trong cùng một hàng có chiều cao bằng nhau */
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Định dạng văn bản hiển thị tự nhiên, tuyệt đối không ẩn dòng */
+        .news-summary-text {
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 0;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HEADER -->
+    <header class="bg-custom-header text-white py-2 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-gopuram text-accent fs-3 me-2"></i>
+                <span class="fs-4 text-accent navbar-brand">Di Sản Trà Vinh</span>
+            </div>
+            <div class="d-flex align-items-center">
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html"><i class="fa-solid fa-house me-1"></i> Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Khám phá di sản</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="vatthe.html">Di sản Vật thể</a></li>
+                            <li><a class="dropdown-item" href="phivatthe.html">Di sản Phi vật thể</a></li>
+                            <li><a class="dropdown-item" href="amthuc.html">Ẩm thực Trà Vinh</a></li>
+                            <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" href="bandott.html"><i class="fa-solid fa-map-location-dot me-1"></i> Bản đồ tương tác</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="lichevent.html"><i class="fa-solid fa-calendar-days me-1"></i> Lịch sự kiện</a></li>
+                    <li class="nav-item"><a class="nav-link active text-accent" href="tintuc.html"><i class="fa-solid fa-newspaper me-1"></i> Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="introduce.html"><i class="fa-solid fa-circle-info me-1"></i> Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. PAGE BANNER -->
+    <div class="page-banner">
+        <div class="text-center px-3">
+            <h1 class="display-5 text-accent text-uppercase">Bảng Tin Tổng Quan</h1>
+            <p class="lead text-white-50">Cập nhật dòng sự kiện nổi bật và bảo tồn văn hóa tại Trà Vinh</p>
+        </div>
+    </div>
+
+    <!-- 4. DANH SÁCH BÀI VIẾT -->
+    <div class="container my-5">
+        
+        <!-- Thanh công cụ điều hướng bộ lọc -->
+        <div class="row g-3 mb-4 align-items-center justify-content-between bg-white p-3 rounded shadow-sm mx-1">
+            <div class="col-md-8 d-flex gap-2 flex-wrap" id="categoryTabGroup">
+                <button class="btn btn-sm btn-accent filter-btn active" data-cate="all">Tất cả thông tin</button>
+                <button class="btn btn-sm btn-outline-secondary filter-btn" data-cate="su-kien">Sự kiện & Hoạt động</button>
+                <button class="btn btn-sm btn-outline-secondary filter-btn" data-cate="van-hoa">Bảo tồn văn hóa</button>
+                <button class="btn btn-sm btn-outline-secondary filter-btn" data-cate="cam-nang">Cẩm nang khám phá</button>
+            </div>
+            <div class="col-md-3 text-md-end text-muted small fw-bold">
+                Số lượng: <span id="newsCounter" class="text-danger">6</span> bài viết
+            </div>
+        </div>
+
+        <!-- Lưới hiển thị Card -->
+        <div class="row g-4" id="newsGridContainer">
+            
+            <!-- Bài viết 1 -->
+            <div class="col-md-4 news-item" data-cate="su-kien">
+                <div class="card news-card">
+                    <img src="https://baovinhlong.com.vn/file/e7837c027f6ecd14017ffa4e5f2a0e34/102025/4_20251001083426.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Số hóa di tích">
+                    <div class="card-body">
+                        <span class="badge bg-danger mb-2">TIÊU ĐIỂM SỰ KIỆN</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Trà Vinh thúc đẩy số hóa các di tích lịch sử - văn hóa và danh lam thắng cảnh</h5>
+                        <p class="card-text text-secondary small news-summary-text">Tỉnh Trà Vinh đã và đang phối hợp với các đơn vị công nghệ triển khai số hóa, quét dữ liệu 3D thực tế ảo (VR) cho các di tích kiến trúc nghệ thuật và di tích lịch sử cấp quốc gia, cấp tỉnh (bao gồm hệ thống các ngôi chùa cổ). Dự án giúp lưu trữ dữ liệu kiến trúc phục vụ công tác bảo tồn lâu dài, đồng thời tạo không gian trải nghiệm tương tác trực quan cho du khách thập phương tham quan từ xa một cách thuận tiện.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> Tháng 7, 2026</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Sự kiện</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 2 -->
+            <div class="col-md-4 news-item" data-cate="van-hoa">
+                <div class="card news-card">
+                    <img src="https://dantocmiennui-media.baotintuc.vn/images/71dc5abaef07046fa2b3467e25bdef710068c739efafe4d8ece1527d01f37f150d141b3ec043bfebf6c2372c65295c69/soctrang3-1.jpg.avif" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Lễ Sene Dolta">
+                    <div class="card-body">
+                        <span class="badge mb-2" style="background-color: var(--secondary-color); color: var(--accent-color);">BẢO TỒN VĂN HÓA</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Đồng bào Khmer Trà Vinh rộn ràng đón mừng lễ Sene Dolta</h5>
+                        <p class="card-text text-secondary small news-summary-text">Tại các khu vực cộng đồng phum sóc thuộc huyện Tiểu Cần, Châu Thành, Cầu Kè, bà con đang tất bật chỉnh trang nhà cửa, chuẩn bị các loại bánh trái truyền thống để dâng cúng tổ tiên. Không khí hướng về ngày đại lễ báo hiếu ông bà tổ tiên (Sene Dolta) diễn ra vô cùng ấm áp, mang đậm nét đẹp văn hóa tâm linh và thắt chặt tình đoàn kết đặc trưng của đồng bào địa phương nơi đây.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> 2 ngày trước</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Văn hóa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 3 -->
+            <div class="col-md-4 news-item" data-cate="cam-nang">
+                <div class="card news-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-tpBdE5MoTb9CXpO6BjhRMyDU0x_iMMk3DAynv94pBptdpwYwGEvoQt0S&s=10" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Ẩm thực">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">CẨM NANG KHÁM PHÁ</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Hành trình khám phá những món ngon trứ danh độc đáo của vùng đất Trà Vinh</h5>
+                        <p class="card-text text-secondary small news-summary-text">Nền ẩm thực bản địa phản ánh sự giao thoa văn hóa sâu sắc và lâu đời giữa ba dân tộc Kinh - Khmer - Hoa. Khi đến du lịch, du khách không nên bỏ qua những món ăn trứ danh làm nên thương hiệu ẩm thực vùng đất này bao gồm bún nước lèo đậm vị phum sóc, bánh canh Bến Có dẻo thơm, bánh tét Trà Cuôn và quả dừa sáp béo ngậy đặc sản vùng Cầu Kè.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> 5 ngày trước</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Cẩm nang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 4 -->
+            <div class="col-md-4 news-item" data-cate="su-kien">
+                <div class="card news-card">
+                    <img src="https://tuilanguoimientay.vn/wp-content/uploads/2022/03/lang-banh-tet-tra-cuon-1-1024x597.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Làng nghề">
+                    <div class="card-body">
+                        <span class="badge bg-secondary text-white mb-2">TIN HOẠT ĐỘNG</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Bảo tồn và phát triển Làng nghề truyền thống Bánh tét Trà Cuôn</h5>
+                        <p class="card-text text-secondary small news-summary-text">Làng nghề truyền thống bánh tét Trà Cuôn (xã Kim Hòa, huyện Cầu Ngang) từ lâu đã trở thành biểu tượng ẩm thực của tỉnh. Với sự hỗ trợ của các cấp ngành, làng nghề không chỉ giữ vững bí quyết gói bánh gia truyền độc đáo độc-lạ mà còn được đầu tư cải tiến, đạt chuẩn OCOP, góp phần tạo việc làm ổn định, nâng cao thương hiệu và thúc đẩy phát triển kinh tế du lịch bền vững cho địa phương.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> 1 tuần trước</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Sự kiện</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 5 -->
+            <div class="col-md-4 news-item" data-cate="van-hoa">
+                <div class="card news-card">
+                    <img src="https://admin.vov.gov.vn/UploadFolder/KhoTin/Images/UploadFolder/VOVVN/Images/sites/default/files/styles/large_watermark/public/2024-07/3-em-chane-so-phia-duoc-ong-thach-thia-se-ray-chinh-sua-tiet-tau-nhac-cu-dan_.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Chầm riêng chà pây">
+                    <div class="card-body">
+                        <span class="badge mb-2" style="background-color: var(--secondary-color); color: var(--accent-color);">BẢO TỒN VĂN HÓA</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Mở lớp truyền dạy nghệ thuật Chầm-riêng Chà-pây của đồng bào Khmer</h5>
+                        <p class="card-text text-secondary small news-summary-text">Nhằm bảo tồn và phát huy loại hình nghệ thuật độc xướng, gảy đàn Chà-pây độc đáo đã được Bộ Văn hóa, Thể thao và Du lịch công nhận là Di sản văn hóa phi vật thể quốc gia, tỉnh Trà Vinh thường xuyên tổ chức các lớp truyền dạy. Chương trình có sự tham gia của các nghệ nhân gạo cội truyền lửa trực tiếp cho thế hệ trẻ trong phum sóc.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> 2 tuần trước</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Văn hóa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 6 -->
+            <div class="col-md-4 news-item" data-cate="cam-nang">
+                <div class="card news-card">
+                    <img src="https://cdn.tcdulichtphcm.vn/upload/1-2022/images/2022-03-30/picture-39-1648635800-296-width1600height1066.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Ao Bà Om">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">CẨM NANG KHÁM PHÁ</span>
+                        <h5 class="card-title fw-bold text-dark news-title mb-3">Danh thắng Ao Bà Om - Điểm đến văn hóa tâm linh không thể bỏ qua tại Trà Vinh</h5>
+                        <p class="card-text text-secondary small news-summary-text">Ao Bà Om (Thắng cảnh quốc gia) không chỉ là hồ nước trong xanh phẳng lặng, tĩnh mịch mà còn là điểm hẹn lý tưởng vào mỗi buổi chiều tà. Bài viết chia sẻ các góc bấm máy chụp ảnh check-in tuyệt đẹp dưới những rặng cây sao, cây dầu cổ thụ trăm năm tuổi có bộ rễ bọc xù xì kỳ vĩ, độc đáo ôm trọn lấy bờ ao, tạo nên khung cảnh hoàng hôn rực rỡ thu hút du khách.</p>
+                        <div class="mt-4 pt-2 border-top text-muted small d-flex justify-content-between">
+                            <span><i class="fa-regular fa-calendar me-1"></i> 3 tuần trước</span>
+                            <span><i class="fa-solid fa-folder open me-1"></i> Cẩm nang</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="noNewsAlert" class="alert alert-warning text-center d-none my-4">
+            <i class="fa-solid fa-newspaper me-2"></i> Không tìm thấy kết quả phù hợp.
+        </div>
+    </div>
+
+    <!-- 5. FOOTER -->
+    <footer class="bg-dark text-white-50 pt-5 pb-3 border-top border-4 border-warning">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3 text-accent"><i class="fa-solid fa-gopuram me-2"></i>TRA VINH HERITAGE</h5>
+                    <p class="small">Sản phẩm số hóa phục vụ bảo tồn và phát triển văn hóa di sản của vùng đất Tây Nam Bộ Việt Nam.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-white mb-3">Liên kết tra cứu</h5>
+                    <ul class="list-unstyled small">
+                        <li><a href="vatthe.html" class="text-white-50 text-decoration-none">Di sản Vật thể</a></li>
+                        <li><a href="phivatthe.html" class="text-white-50 text-decoration-none">Di sản Phi vật thể</a></li>
+                        <li><a href="lichsukien.html" class="text-white-50 text-decoration-none">Lịch trình sự kiện</a></li>
+                        <li><a href="bandott.html" class="text-white-50 text-decoration-none">Bản đồ số tương tác</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <h5 class="text-white mb-3">Đơn vị thực hiện</h5>
+                    <p class="small mb-1">Đồ án Nhóm sinh viên Công nghệ thông tin</p>
+                    <p class="badge bg-custom-nav text-accent">Lớp Học: DA25TTC</p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3 border-secondary">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small">
+                <span>&copy; 2026 Tra Vinh Heritage Project. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- LOGIC BỘ LỌC TÌM KIẾM -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const searchInput = document.getElementById("searchNews");
+            const newsItems = document.querySelectorAll(".news-item");
+            const noNewsAlert = document.getElementById("noNewsAlert");
+            const newsCounter = document.getElementById("newsCounter");
+
+            let activeCategory = "all";
+
+            filterButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove("btn-accent", "active");
+                        btn.classList.add("btn-outline-secondary");
+                    });
+
+                    this.classList.remove("btn-outline-secondary");
+                    this.classList.add("btn-accent", "active");
+
+                    activeCategory = this.getAttribute("data-cate");
+                    applyFilters();
+                });
+            });
+
+            searchInput.addEventListener("input", applyFilters);
+
+            function applyFilters() {
+                const keyword = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                newsItems.forEach(item => {
+                    const itemCategory = item.getAttribute("data-cate");
+                    const itemTitle = item.querySelector(".news-title").textContent.toLowerCase();
+
+                    const matchCategory = (activeCategory === "all" || itemCategory === activeCategory);
+                    const matchKeyword = itemTitle.includes(keyword);
+
+                    if (matchCategory && matchKeyword) {
+                        item.classList.remove("d-none");
+                        visibleCount++;
+                    } else {
+                        item.classList.add("d-none");
+                    }
+                });
+
+                newsCounter.textContent = visibleCount;
+
+                if (visibleCount > 0) {
+                    noNewsAlert.classList.add("d-none");
+                } else {
+                    noNewsAlert.classList.remove("d-none");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
