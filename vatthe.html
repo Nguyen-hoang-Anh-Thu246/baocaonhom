@@ -106,7 +106,7 @@
     width: 100%;
 }
 
-/* Định dạng Modal để giống ảnh */
+/* Định dạng Modal */
 .modal-info-list {
     padding-left: 20px;
     margin-bottom: 20px;
@@ -129,7 +129,9 @@
     </style>
 </head>
 <body>
-
+ <!-- ============================
+         1. HEADER (Thanh tiêu đề trên cùng)
+    ============================= -->
      <header class="bg-custom-header text-white py-2 shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
@@ -145,7 +147,9 @@
             </div>
         </div>
     </header>
-
+ <!-- ============================
+         2. NAVBAR (Thanh điều hướng)
+    ============================= -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
     <div class="container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -170,10 +174,10 @@
                         <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link text-white" href="bandott.html">Bản đồ tương tác</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Lịch sự kiện</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Tin tức</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Giới thiệu</a></li>
+                
+                <li class="nav-item"><a class="nav-link text-white" href="lichevent.html">Lịch sự kiện</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="tintuc.html">Tin tức</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="introduce.html">Giới thiệu</a></li>
             </ul>
         </div>
     </div>
@@ -333,7 +337,7 @@
         </div> <!-- Kết thúc col -->
         </div> <!-- Đóng thẻ Row duy nhất -->
 </section>
-
+ <!-- /*Khung định dạng trình bày modal*/ -->
     <div class="modal fade" id="heritageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -358,6 +362,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- /*Bộ điều khiển của Modal (cửa sổ nhỏ)*/ -->
     <script>
         const heritageModal = document.getElementById('heritageModal');
 heritageModal.addEventListener('show.bs.modal', event => {

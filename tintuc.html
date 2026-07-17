@@ -76,7 +76,9 @@
     </style>
 </head>
 <body>
-
+ <!-- ============================
+         1. HEADER (Thanh tiêu đề trên cùng)
+    ============================= -->
     <header class="bg-custom-header text-white py-2 shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
@@ -88,7 +90,9 @@
             </div>
         </div>
     </header>
-
+<!-- ============================
+         2. NAVBAR (Thanh điều hướng)
+    ============================= -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom-nav sticky-top shadow-sm">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -106,7 +110,6 @@
                             <li><a class="dropdown-item" href="truyenthong.html">Làng nghề truyền thống</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-white" href="bandott.html"><i class="fa-solid fa-map-location-dot me-1"></i> Bản đồ tương tác</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="lichevent.html"><i class="fa-solid fa-calendar-days me-1"></i> Lịch sự kiện</a></li>
                     <li class="nav-item"><a class="nav-link active text-accent" href="tintuc.html"><i class="fa-solid fa-newspaper me-1"></i> Tin tức</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="introduce.html"><i class="fa-solid fa-circle-info me-1"></i> Giới thiệu</a></li>
@@ -135,7 +138,7 @@
                 Số lượng: <span id="newsCounter" class="text-danger">6</span> bài viết
             </div>
         </div>
-
+            <!-- Thẻ bài viết 1 -->
         <div class="row g-4" id="newsGridContainer">
             <div class="col-md-4 news-item" data-cate="su-kien">
                 <div class="card news-card">
@@ -151,7 +154,7 @@
                     </div>
                 </div>
             </div>
-
+                <!-- Thẻ bài viết 2 -->
             <div class="col-md-4 news-item" data-cate="van-hoa">
                 <div class="card news-card">
                     <img src="https://dantocmiennui-media.baotintuc.vn/images/71dc5abaef07046fa2b3467e25bdef710068c739efafe4d8ece1527d01f37f150d141b3ec043bfebf6c2372c65295c69/soctrang3-1.jpg.avif" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Lễ Sene Dolta">
@@ -166,7 +169,7 @@
                     </div>
                 </div>
             </div>
-
+                <!-- Thẻ bài viết 3 -->
             <div class="col-md-4 news-item" data-cate="cam-nang">
                 <div class="card news-card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-tpBdE5MoTb9CXpO6BjhRMyDU0x_iMMk3DAynv94pBptdpwYwGEvoQt0S&s=10" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Ẩm thực">
@@ -181,7 +184,7 @@
                     </div>
                 </div>
             </div>
-
+                <!-- Thẻ bài viết 4 -->
             <div class="col-md-4 news-item" data-cate="su-kien">
                 <div class="card news-card">
                     <img src="https://tuilanguoimientay.vn/wp-content/uploads/2022/03/lang-banh-tet-tra-cuon-1-1024x597.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Làng nghề">
@@ -196,7 +199,7 @@
                     </div>
                 </div>
             </div>
-
+                <!-- Thẻ bài viết 5 -->
             <div class="col-md-4 news-item" data-cate="van-hoa">
                 <div class="card news-card">
                     <img src="https://admin.vov.gov.vn/UploadFolder/KhoTin/Images/UploadFolder/VOVVN/Images/sites/default/files/styles/large_watermark/public/2024-07/3-em-chane-so-phia-duoc-ong-thach-thia-se-ray-chinh-sua-tiet-tau-nhac-cu-dan_.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Chầm riêng chà pây">
@@ -211,10 +214,10 @@
                     </div>
                 </div>
             </div>
-
+                <!-- Thẻ bài viết 6 -->
             <div class="col-md-4 news-item" data-cate="cam-nang">
                 <div class="card news-card">
-                    <img src="https://cdn.tcdulichtphcm.vn/upload/1-2022/images/2022-03-30/picture-39-1648635800-296-width1600height1066.jpg" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Ao Bà Om">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyCuywvtrTMieG1aPna0hk0sYx-vct9f_Bv0fpMaqgNw&s=10" class="card-img-top" style="height: 190px; object-fit: cover;" alt="Ao Bà Om">
                     <div class="card-body">
                         <span class="badge bg-warning text-dark mb-2">CẨM NANG KHÁM PHÁ</span>
                         <h5 class="card-title fw-bold text-dark news-title mb-3">Danh thắng Ao Bà Om - Điểm đến văn hóa tâm linh không thể bỏ qua tại Trà Vinh</h5>
@@ -227,10 +230,6 @@
                 </div>
             </div>
 
-        </div>
-
-        <div id="noNewsAlert" class="alert alert-warning text-center d-none my-4">
-            <i class="fa-solid fa-newspaper me-2"></i> Không tìm thấy kết quả phù hợp.
         </div>
     </div>
 
@@ -247,7 +246,6 @@
                         <li><a href="vatthe.html" class="text-white-50 text-decoration-none">Di sản Vật thể</a></li>
                         <li><a href="phivatthe.html" class="text-white-50 text-decoration-none">Di sản Phi vật thể</a></li>
                         <li><a href="lichsukien.html" class="text-white-50 text-decoration-none">Lịch trình sự kiện</a></li>
-                        <li><a href="bandott.html" class="text-white-50 text-decoration-none">Bản đồ số tương tác</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 text-md-end">
@@ -264,7 +262,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+            <!-- Phần lọc bài viết -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const filterButtons = document.querySelectorAll(".filter-btn");
